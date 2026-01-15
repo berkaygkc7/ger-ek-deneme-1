@@ -909,10 +909,11 @@
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#services">Hizmetler</a></li>
                 <li><a href="#safety">Güvenlik</a></li>
-                <li><a href="#testimonials">Referanslar</a></li>
+                <li><a href="#referanslar">Referanslar</a></li>
                 <li><a href="#gallery">Galeri</a></li>
                 <li><a href="#pricing">Fiyatlandırma</a></li>
                 <li><a href="#faq">SSS</a></li>
+                <li><a href="#konum">Konum</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
             <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
@@ -922,10 +923,11 @@
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#services">Hizmetler</a></li>
                 <li><a href="#safety">Güvenlik</a></li>
-                <li><a href="#testimonials">Referanslar</a></li>
+                <li><a href="#referanslar">Referanslar</a></li>
                 <li><a href="#gallery">Galeri</a></li>
                 <li><a href="#pricing">Fiyatlandırma</a></li>
                 <li><a href="#faq">SSS</a></li>
+                <li><a href="#konum">Konum</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
         </div>
@@ -1207,30 +1209,50 @@
         </div>
     </section>
 
-    <!-- Partners Section -->
-    <section class="partners">
+    <!-- Partners/Referanslar Section -->
+    <section class="partners" id="referanslar">
         <div class="container">
-            <h2 class="section-title">Güvenilir Ortaklarımız</h2>
-            <p class="section-subtitle">Birlikte çalıştığımız değerli kurumlar</p>
+            <h2 class="section-title">Referanslarımız</h2>
+            <p class="section-subtitle">Hizmet verdiğimiz değerli kurumlar</p>
             <div class="partners-grid">
                 <div class="partner-logo">
-                    <div class="partner-placeholder">Okul 1</div>
+                    <div class="partner-placeholder" style="font-size: 0.9rem; text-align: center; padding: 0.5rem;">Mustafa Kemal Mesleki ve Teknik Anadolu Lisesi</div>
                 </div>
                 <div class="partner-logo">
-                    <div class="partner-placeholder">Okul 2</div>
+                    <div class="partner-placeholder" style="font-size: 0.9rem; text-align: center; padding: 0.5rem;">Şehit Aytekin Kuru Anadolu Lisesi</div>
                 </div>
-                <div class="partner-logo">
-                    <div class="partner-placeholder">Kurum 1</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="konum" style="padding: 60px 2rem; background: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Konumumuz</h2>
+            <p class="section-subtitle">Merkez ofisimizi haritada görüntüleyin</p>
+            <div style="margin-top: 2rem; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12230.044447784836!2d32.5988058!3d39.9866316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDU5JzExLjkiTiAzMsKwMzUnNTUuNyJF!5e0!3m2!1str!2str!4v1705328400000" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; flex: 1; min-width: 280px; border-left: 4px solid var(--yellow);">
+                    <h4 style="color: var(--navy-blue); margin-bottom: 0.5rem;">📍 Merkez Ofis</h4>
+                    <p style="color: var(--gray);">ŞEYH ŞAMİL MAHALLESİ 137. Cadde 17361 Ada A1-3 Etimesgut / ANKARA</p>
                 </div>
-                <div class="partner-logo">
-                    <div class="partner-placeholder">Kurum 2</div>
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; flex: 1; min-width: 280px; border-left: 4px solid var(--yellow);">
+                    <h4 style="color: var(--navy-blue); margin-bottom: 0.5rem;">📍 Şube</h4>
+                    <p style="color: var(--gray);">AHİ EVRAN MAHALLESİ AHİ MESUT BULVARI 369B-1 Sincan / ANKARA</p>
                 </div>
-                <div class="partner-logo">
-                    <div class="partner-placeholder">Okul 3</div>
-                </div>
-                <div class="partner-logo">
-                    <div class="partner-placeholder">Kurum 3</div>
-                </div>
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center;">
+                <a href="https://www.google.com/maps/search/ŞEYH+ŞAMİL+MAHALLESİ+137.+Cadde+17361+Ada+A1-3+Etimesgut+%2F+ANKARA/@39.9866316,32.5988058,14z" class="cta-button" style="background: var(--navy-blue); color: var(--white);">Google Maps'te Aç</a>
             </div>
         </div>
     </section>
@@ -1332,9 +1354,11 @@
                 <a href="#home">Ana Sayfa</a>
                 <a href="#services">Hizmetlerimiz</a>
                 <a href="#safety">Güvenlik</a>
+                <a href="#referanslar">Referanslar</a>
                 <a href="#gallery">Galeri</a>
                 <a href="#pricing">Fiyatlandırma</a>
                 <a href="#faq">SSS</a>
+                <a href="#konum">Konum</a>
             </div>
             <div class="footer-section">
                 <h3>İletişim</h3>
