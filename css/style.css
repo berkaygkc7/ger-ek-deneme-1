@@ -199,14 +199,14 @@ input, textarea, select {
 }
 
 .logo-icon {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--gold) 100%);
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--primary-black);
     box-shadow: var(--shadow-yellow);
 }
@@ -216,10 +216,11 @@ input, textarea, select {
 }
 
 .logo-image {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
     border-radius: var(--border-radius);
     object-fit: contain;
+    background: transparent;
 }
 
 .logo-text {
