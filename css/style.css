@@ -1733,7 +1733,82 @@ section {
 }
 
 /* --------------------------------------------------------------------------
-   18. Back to Top Button
+   18. WhatsApp Floating Button
+   -------------------------------------------------------------------------- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--white);
+    padding: 15px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    z-index: 998;
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.4);
+    transition: var(--transition);
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float i {
+    font-size: 1.8rem;
+}
+
+.whatsapp-text {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+@keyframes pulse-whatsapp {
+    0%, 100% {
+        box-shadow: 0 6px 30px rgba(37, 211, 102, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 40px rgba(37, 211, 102, 0.7);
+    }
+}
+
+/* Mobile WhatsApp Button */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 90px;
+        right: 20px;
+        padding: 14px;
+        border-radius: 50%;
+    }
+    
+    .whatsapp-text {
+        display: none;
+    }
+    
+    .whatsapp-float i {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-float {
+        bottom: 80px;
+        right: 15px;
+        padding: 12px;
+    }
+    
+    .whatsapp-float i {
+        font-size: 1.4rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   19. Back to Top Button
    -------------------------------------------------------------------------- */
 .back-to-top {
     position: fixed;
