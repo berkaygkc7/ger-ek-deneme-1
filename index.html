@@ -893,6 +893,972 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* ===== ServisBot Panel System ===== */
+        .sp-panel-section {
+            background: var(--white);
+            padding: 80px 2rem;
+        }
+
+        .sp-panel-section.alt-bg {
+            background: var(--gray-light);
+        }
+
+        .sp-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .sp-tab-btn {
+            background: var(--white);
+            border: 2px solid #e0e0e0;
+            color: var(--gray-dark);
+            padding: 0.7rem 1.4rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.25s;
+        }
+
+        .sp-tab-btn:hover {
+            border-color: var(--yellow);
+            color: var(--navy-blue);
+        }
+
+        .sp-tab-btn.active {
+            background: var(--navy-blue);
+            color: var(--white);
+            border-color: var(--navy-blue);
+        }
+
+        .sp-tab-panel {
+            display: none;
+        }
+
+        .sp-tab-panel.active {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        /* Shared Components */
+        .sp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.65rem 1.3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sp-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sp-btn-primary { background: var(--navy-blue); color: var(--white); }
+        .sp-btn-primary:hover:not(:disabled) { background: var(--navy-dark); }
+        .sp-btn-success { background: #4caf50; color: var(--white); }
+        .sp-btn-success:hover:not(:disabled) { background: #388e3c; }
+        .sp-btn-danger { background: #e53935; color: var(--white); }
+        .sp-btn-danger:hover:not(:disabled) { background: #c62828; }
+        .sp-btn-outline { background: transparent; border: 2px solid var(--navy-blue); color: var(--navy-blue); }
+        .sp-btn-outline:hover:not(:disabled) { background: var(--navy-blue); color: var(--white); }
+        .sp-btn-sm { padding: 0.4rem 0.85rem; font-size: 0.8rem; }
+        .sp-btn-lg { width: 100%; justify-content: center; padding: 0.9rem; font-size: 1.05rem; }
+
+        .sp-label { display: block; font-weight: 600; color: var(--navy-blue); margin-bottom: 0.4rem; font-size: 0.9rem; }
+
+        .sp-select, .sp-input, .sp-textarea {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+            background: var(--white);
+        }
+
+        .sp-select:focus, .sp-input:focus, .sp-textarea:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        .sp-select-sm, .sp-input-sm { padding: 0.45rem 0.7rem; font-size: 0.85rem; }
+        .sp-textarea { resize: vertical; min-height: 80px; }
+        .sp-form-group { margin-bottom: 1.2rem; }
+        .sp-empty-state { text-align: center; color: var(--gray); padding: 2rem; font-size: 0.95rem; }
+
+        .sp-info-box {
+            background: #e3f2fd;
+            color: var(--navy-blue);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Route Planner */
+        .sp-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .sp-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sp-step-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .sp-step.active .sp-step-num { background: var(--yellow); color: var(--navy-dark); }
+        .sp-step.completed .sp-step-num { background: #4caf50; color: var(--white); }
+
+        .sp-step-label { font-size: 0.75rem; color: var(--gray); font-weight: 500; }
+        .sp-step.active .sp-step-label { color: var(--navy-blue); font-weight: 700; }
+        .sp-step.completed .sp-step-label { color: #4caf50; }
+
+        .sp-step-line {
+            flex: 0 0 40px;
+            height: 3px;
+            background: #e0e0e0;
+            margin: 0 0.25rem;
+            margin-bottom: 1.2rem;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        .sp-step-line.completed { background: #4caf50; }
+
+        .sp-radio-group { display: flex; flex-direction: column; gap: 0.6rem; }
+
+        .sp-radio-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            background: var(--gray-light);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sp-radio-card:hover { border-color: var(--yellow); }
+        .sp-radio-card:has(input:checked) { border-color: var(--navy-blue); background: #e8eef5; }
+
+        .sp-radio-body { display: flex; flex-direction: column; gap: 0.15rem; }
+        .sp-radio-body strong { font-size: 0.95rem; color: var(--navy-blue); }
+        .sp-radio-body small { color: var(--gray); font-size: 0.8rem; }
+
+        .sp-time-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+
+        .sp-time-chip {
+            padding: 0.55rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .sp-time-chip:hover { border-color: var(--yellow); }
+        .sp-time-chip.selected { background: var(--navy-blue); color: var(--white); border-color: var(--navy-blue); }
+
+        .sp-confirm-card {
+            background: var(--gray-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .sp-confirm-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        .sp-confirm-row:last-child { border-bottom: none; }
+        .sp-confirm-row span { color: var(--gray); }
+
+        .sp-planner-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .sp-planner-actions { margin-top: 1.2rem; }
+
+        /* Activities */
+        .sp-activity-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .sp-filter-btn {
+            padding: 0.4rem 1rem;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 20px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sp-filter-btn:hover { border-color: var(--navy-blue); }
+        .sp-filter-btn.active { background: var(--navy-blue); color: var(--white); border-color: var(--navy-blue); }
+
+        .sp-activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .sp-activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+
+        .sp-activity-item:hover { transform: translateX(4px); }
+
+        .sp-activity-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            color: var(--white);
+        }
+
+        .sp-activity-body { flex: 1; min-width: 0; }
+
+        .sp-activity-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.3rem;
+        }
+
+        .sp-activity-header strong { font-size: 0.95rem; color: var(--navy-blue); }
+
+        .sp-activity-badge {
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .sp-activity-body p { color: var(--gray-dark); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+        .sp-activity-body small { color: var(--gray); font-size: 0.75rem; }
+
+        /* Attendance */
+        .sp-attendance-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .sp-attendance-date {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--navy-blue);
+            margin-bottom: 1rem;
+        }
+
+        .sp-attendance-stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .sp-att-stat {
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex: 1;
+            min-width: 100px;
+            justify-content: center;
+        }
+
+        .sp-att-stat span { font-weight: 700; font-size: 1.2rem; }
+        .sp-att-present { background: #e8f5e9; color: #2e7d32; }
+        .sp-att-absent { background: #ffebee; color: #c62828; }
+        .sp-att-unmarked { background: #fff3e0; color: #e65100; }
+        .sp-att-pct { background: #e3f2fd; color: #1565c0; }
+
+        .sp-attendance-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .sp-att-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .sp-att-filters .sp-select-sm, .sp-att-filters .sp-input-sm {
+            width: auto;
+            min-width: 150px;
+        }
+
+        .sp-att-bulk { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+        .sp-attendance-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .sp-att-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: var(--white);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .sp-att-row.present { border-color: #4caf50; background: #f1f8e9; }
+        .sp-att-row.absent { border-color: #e53935; background: #fce4ec; }
+        .sp-att-row.outside-route { position: relative; }
+
+        .sp-att-student {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sp-att-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--navy-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .sp-att-info { display: flex; flex-direction: column; gap: 0.1rem; }
+        .sp-att-info strong { font-size: 0.9rem; color: var(--navy-blue); }
+        .sp-att-info small { color: var(--gray); font-size: 0.75rem; }
+
+        .sp-att-warning {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #e65100;
+            background: #fff3e0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .sp-att-actions {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .sp-att-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #e0e0e0;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .sp-att-btn.present:hover, .sp-att-btn.present.active { background: #4caf50; color: var(--white); border-color: #4caf50; }
+        .sp-att-btn.absent:hover, .sp-att-btn.absent.active { background: #e53935; color: var(--white); border-color: #e53935; }
+
+        .sp-attendance-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Route Check */
+        .sp-alert-banner {
+            padding: 0.85rem 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .sp-alert-banner.warning {
+            background: #fff3e0;
+            color: #e65100;
+            border-left: 4px solid #ff9800;
+        }
+
+        .sp-outside-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .sp-outside-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .sp-outside-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sp-outside-info div { display: flex; flex-direction: column; gap: 0.1rem; }
+        .sp-outside-info strong { font-size: 0.95rem; color: var(--navy-blue); }
+        .sp-outside-info small { color: var(--gray); font-size: 0.8rem; }
+
+        .sp-outside-actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+        /* Driver Survey Modal */
+        .sp-survey-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 10002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .sp-survey-content {
+            background: var(--white);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .sp-survey-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, var(--navy-blue), var(--navy-dark));
+            color: var(--white);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .sp-survey-header h3 { margin: 0; font-size: 1.15rem; }
+
+        .sp-survey-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.6rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .sp-survey-close:hover { opacity: 1; }
+
+        .sp-survey-body { padding: 1.5rem; }
+        .sp-survey-desc { color: var(--gray); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5; }
+
+        .sp-survey-criteria {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin: 1.2rem 0;
+        }
+
+        .sp-criterion {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .sp-criterion-label { flex: 1; font-size: 0.9rem; font-weight: 500; color: var(--navy-blue); white-space: nowrap; }
+        .sp-criterion-value { font-size: 0.8rem; color: var(--gray); min-width: 30px; text-align: right; }
+
+        .sp-stars { display: flex; gap: 2px; }
+
+        .sp-star {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: color 0.15s, transform 0.15s;
+            user-select: none;
+        }
+
+        .sp-star:hover { transform: scale(1.15); }
+        .sp-star.filled { color: #ffc107; }
+
+        .sp-survey-avg {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--gray-light);
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            color: var(--navy-blue);
+        }
+
+        .sp-survey-avg strong { font-size: 1.3rem; color: #ff9800; }
+
+        /* Demo Request Form */
+        .sp-demo-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sp-demo-info {
+            background: linear-gradient(135deg, var(--navy-blue), var(--navy-dark));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .sp-demo-info h3 { color: var(--yellow); margin-bottom: 1rem; font-size: 1.3rem; }
+        .sp-demo-info p { line-height: 1.8; opacity: 0.9; font-size: 0.95rem; }
+
+        .sp-demo-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+        }
+
+        .sp-demo-features li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .sp-demo-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .sp-demo-form h3 {
+            color: var(--navy-blue);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+
+        .sp-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Contact Map */
+        .sp-contact-map {
+            margin-top: 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Responsive for new panels */
+        @media (max-width: 768px) {
+            .sp-tabs { gap: 0.3rem; }
+            .sp-tab-btn { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+            .sp-demo-section { grid-template-columns: 1fr; }
+            .sp-form-row { grid-template-columns: 1fr; }
+            .sp-attendance-toolbar { flex-direction: column; }
+            .sp-outside-card { flex-direction: column; align-items: flex-start; }
+            .sp-steps { flex-wrap: wrap; }
+            .sp-step-line { flex: 0 0 20px; }
+            .sp-criterion { flex-wrap: wrap; }
+            .sp-attendance-stats-bar { flex-direction: column; }
+            .sp-att-stat { min-width: unset; }
+        }
+
+        /* Chatbot Styles */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--yellow);
+            color: var(--navy-dark);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255,193,7,0.4);
+            z-index: 1001;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255,193,7,0.5);
+        }
+
+        .chatbot-toggle.active {
+            background: var(--navy-blue);
+            color: var(--white);
+        }
+
+        .chatbot-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            background: #e53935;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 380px;
+            max-height: 520px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .chatbot-window.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--navy-blue), var(--navy-dark));
+            color: var(--white);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chatbot-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .chatbot-header-info h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .chatbot-header-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .chatbot-status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+        .chatbot-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.4rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .chatbot-close:hover {
+            opacity: 1;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-height: 280px;
+            max-height: 320px;
+            background: #f8f9fa;
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 5px;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: msgAppear 0.3s ease;
+        }
+
+        @keyframes msgAppear {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.bot {
+            background: var(--white);
+            color: var(--gray-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .chat-message.user {
+            background: var(--navy-blue);
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.typing .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 4px 0;
+        }
+
+        .chat-message.typing .typing-dots span {
+            width: 7px;
+            height: 7px;
+            background: var(--gray);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+
+        .chat-message.typing .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .chat-message.typing .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0 1rem 0.75rem;
+            background: #f8f9fa;
+        }
+
+        .quick-reply-btn {
+            background: var(--white);
+            border: 1.5px solid var(--navy-blue);
+            color: var(--navy-blue);
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .quick-reply-btn:hover {
+            background: var(--navy-blue);
+            color: var(--white);
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            padding: 0.75rem;
+            border-top: 1px solid #e0e0e0;
+            background: var(--white);
+            gap: 0.5rem;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chatbot-input:focus {
+            border-color: var(--yellow);
+        }
+
+        .chatbot-send {
+            width: 40px;
+            height: 40px;
+            background: var(--navy-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .chatbot-send:hover {
+            background: var(--navy-dark);
+        }
+
+        @media (max-width: 768px) {
+            .chatbot-window {
+                left: 10px;
+                right: 10px;
+                bottom: 90px;
+                width: auto;
+                max-height: 70vh;
+            }
+
+            .chatbot-toggle {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -912,6 +1878,7 @@
                 <li><a href="#testimonials">Referanslar</a></li>
                 <li><a href="#gallery">Galeri</a></li>
                 <li><a href="#pricing">Fiyatlandırma</a></li>
+                <li><a href="#panel">Panel</a></li>
                 <li><a href="#faq">SSS</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
@@ -925,6 +1892,7 @@
                 <li><a href="#testimonials">Referanslar</a></li>
                 <li><a href="#gallery">Galeri</a></li>
                 <li><a href="#pricing">Fiyatlandırma</a></li>
+                <li><a href="#panel">Panel</a></li>
                 <li><a href="#faq">SSS</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
@@ -1161,6 +2129,140 @@
         </div>
     </section>
 
+    <!-- Management Panel Section -->
+    <section class="sp-panel-section alt-bg" id="panel">
+        <div class="container">
+            <h2 class="section-title">Yönetim Paneli</h2>
+            <p class="section-subtitle">Servis operasyonlarınızı tek bir yerden yönetin</p>
+
+            <div class="sp-tabs">
+                <button class="sp-tab-btn active" data-tab="route-planner">🗺️ Rota Planlama</button>
+                <button class="sp-tab-btn" data-tab="attendance">📋 Yoklama</button>
+                <button class="sp-tab-btn" data-tab="activities">📊 Son Aktiviteler</button>
+                <button class="sp-tab-btn" data-tab="route-check">⚠️ Güzergah Kontrol</button>
+                <button class="sp-tab-btn" data-tab="demo-request">🎯 Demo Talep Et</button>
+                <button class="sp-tab-btn" data-action="open-survey">⭐ Şoför Değerlendir</button>
+            </div>
+
+            <!-- Route Planner -->
+            <div class="sp-tab-panel active" id="panel-route-planner">
+                <div class="container">
+                    <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Rota Planlama</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Güzergah, durak ve saat seçerek rota belirleyin. Her adımda geri dönebilir veya iptal edebilirsiniz.</p>
+                    <div id="routePlannerContent"></div>
+                </div>
+            </div>
+
+            <!-- Attendance -->
+            <div class="sp-tab-panel" id="panel-attendance">
+                <div class="container">
+                    <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Günlük Yoklama</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Öğrencilerin günlük devam durumlarını kaydedin. Güzergah dışı öğrenciler otomatik olarak işaretlenir.</p>
+                    <div id="attendanceContent"></div>
+                </div>
+            </div>
+
+            <!-- Activities -->
+            <div class="sp-tab-panel" id="panel-activities">
+                <div class="container">
+                    <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Son Aktiviteler</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Sistem genelindeki son hareketleri ve bildirimleri takip edin.</p>
+                    <div id="activitiesContent"></div>
+                </div>
+            </div>
+
+            <!-- Route Check -->
+            <div class="sp-tab-panel" id="panel-route-check">
+                <div class="container">
+                    <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Güzergah Dışı Öğrenciler</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Kayıtlı güzergah dışında ikamet eden öğrencileri görüntüleyin ve velileri bilgilendirin.</p>
+                    <div id="routeCheckContent"></div>
+                </div>
+            </div>
+
+            <!-- Demo Request -->
+            <div class="sp-tab-panel" id="panel-demo-request">
+                <div class="container">
+                    <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Demo Talep Et</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Servis yönetim sistemimizi ücretsiz deneyin. Ekibimiz sizinle iletişime geçecektir.</p>
+                    <div class="sp-demo-section">
+                        <div class="sp-demo-info">
+                            <h3>Neden ServisPark?</h3>
+                            <p>ServisPark Turizm yönetim sistemi ile tüm servis operasyonlarınızı dijitalleştirin.</p>
+                            <ul class="sp-demo-features">
+                                <li>✓ Gerçek zamanlı GPS takip sistemi</li>
+                                <li>✓ Otomatik yoklama ve bildirim</li>
+                                <li>✓ Akıllı rota optimizasyonu</li>
+                                <li>✓ Veli mobil uygulaması</li>
+                                <li>✓ Şoför performans raporları</li>
+                                <li>✓ 7/24 teknik destek</li>
+                                <li>✓ Ücretsiz kurulum ve eğitim</li>
+                            </ul>
+                            <p style="margin-top:1rem;"><strong>500+</strong> müşteri · <strong>150+</strong> araç · <strong>25</strong> yıllık deneyim</p>
+                        </div>
+                        <div class="sp-demo-form">
+                            <h3>Demo Başvuru Formu</h3>
+                            <form id="demoRequestForm">
+                                <div class="sp-form-row">
+                                    <div class="sp-form-group">
+                                        <label class="sp-label">Ad Soyad *</label>
+                                        <input class="sp-input" type="text" name="demoName" required>
+                                    </div>
+                                    <div class="sp-form-group">
+                                        <label class="sp-label">E-posta *</label>
+                                        <input class="sp-input" type="email" name="demoEmail" required>
+                                    </div>
+                                </div>
+                                <div class="sp-form-row">
+                                    <div class="sp-form-group">
+                                        <label class="sp-label">Telefon *</label>
+                                        <input class="sp-input" type="tel" name="demoPhone" required>
+                                    </div>
+                                    <div class="sp-form-group">
+                                        <label class="sp-label">Kurum Adı</label>
+                                        <input class="sp-input" type="text" name="demoCompany">
+                                    </div>
+                                </div>
+                                <div class="sp-form-row">
+                                    <div class="sp-form-group">
+                                        <label class="sp-label">Öğrenci Sayısı</label>
+                                        <select class="sp-select" name="demoStudentCount">
+                                            <option value="">Seçin...</option>
+                                            <option value="1-50">1 - 50</option>
+                                            <option value="51-100">51 - 100</option>
+                                            <option value="101-250">101 - 250</option>
+                                            <option value="251-500">251 - 500</option>
+                                            <option value="500+">500+</option>
+                                        </select>
+                                    </div>
+                                    <div class="sp-form-group">
+                                        <label class="sp-label">Hizmet Türü</label>
+                                        <select class="sp-select" name="demoServiceType">
+                                            <option value="">Seçin...</option>
+                                            <option value="school">Okul Servisi</option>
+                                            <option value="corporate">Personel Servisi</option>
+                                            <option value="both">Her İkisi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="sp-form-group">
+                                    <label class="sp-label">Ek Notlar</label>
+                                    <textarea class="sp-textarea" name="demoMessage" placeholder="İhtiyaçlarınız hakkında ek bilgi..." rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="sp-btn sp-btn-primary sp-btn-lg">🎯 Demo Talep Et</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Driver Survey Modal Overlay -->
+    <div class="sp-survey-overlay" id="surveyOverlay">
+        <div class="sp-survey-content"></div>
+    </div>
+
     <!-- FAQ Section -->
     <section class="faq" id="faq">
         <div class="container">
@@ -1276,6 +2378,7 @@
                             Pazar: Sadece Acil Servis
                         </div>
                     </div>
+                    <div id="contactMapContainer" class="sp-contact-map"></div>
                 </div>
                 <div class="contact-form">
                     <h3>Teklif İste</h3>
@@ -1334,6 +2437,7 @@
                 <a href="#safety">Güvenlik</a>
                 <a href="#gallery">Galeri</a>
                 <a href="#pricing">Fiyatlandırma</a>
+                <a href="#panel">Yönetim Paneli</a>
                 <a href="#faq">SSS</a>
             </div>
             <div class="footer-section">
@@ -1358,6 +2462,32 @@
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" title="Yukarı Çık">↑</button>
+
+    <!-- ServisBot TypeScript App -->
+    <script src="dist/app.js"></script>
+
+    <!-- Chatbot -->
+    <button class="chatbot-toggle" id="chatbotToggle" title="ServisBot ile Konuşun">
+        💬
+        <span class="chatbot-badge" id="chatbotBadge">1</span>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">🤖</div>
+            <div class="chatbot-header-info">
+                <h4>ServisBot</h4>
+                <p><span class="chatbot-status"></span>Çevrimiçi</p>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="quick-replies" id="quickReplies"></div>
+        <div class="chatbot-input-area">
+            <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Mesajınızı yazın..." autocomplete="off">
+            <button class="chatbot-send" id="chatbotSend">➤</button>
+        </div>
+    </div>
 
     <script>
         // Loading overlay
@@ -1486,10 +2616,218 @@
         // Gallery lightbox effect (placeholder for future implementation)
         document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', function() {
-                // Future: Open lightbox with full image
                 console.log('Galeri öğesi tıklandı');
             });
         });
+
+        // ServisBot - Chatbot
+        (function() {
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+            const quickReplies = document.getElementById('quickReplies');
+            const chatbotBadge = document.getElementById('chatbotBadge');
+
+            let isOpen = false;
+            let firstOpen = true;
+
+            const knowledgeBase = [
+                {
+                    keywords: ['merhaba', 'selam', 'hey', 'günaydın', 'iyi günler', 'iyi akşamlar'],
+                    response: 'Merhaba! ServisPark Turizm\'e hoş geldiniz. Size nasıl yardımcı olabilirim?',
+                    quickReplies: ['Hizmetleriniz neler?', 'Fiyatlar hakkında bilgi', 'Güvenlik önlemleri', 'İletişim bilgileri']
+                },
+                {
+                    keywords: ['hizmet', 'servis', 'ne yapıyorsunuz', 'neler sunuyorsunuz', 'hizmetleriniz'],
+                    response: 'ServisPark Turizm olarak 3 ana hizmet sunuyoruz:\n\n🎒 <b>Öğrenci Taşımacılığı</b> - Okula gidiş-dönüş güvenli servis\n👔 <b>Personel Servisleri</b> - Kurumsal ulaşım çözümleri\n⭐ <b>Özel Etkinlikler</b> - Gezi ve etkinlik taşımacılığı\n\nHangi hizmet hakkında daha fazla bilgi almak istersiniz?',
+                    quickReplies: ['Öğrenci servisi', 'Personel servisi', 'Fiyatlar', 'Teklif istiyorum']
+                },
+                {
+                    keywords: ['öğrenci', 'okul', 'çocuk', 'taşımacılık'],
+                    response: 'Öğrenci taşımacılığı hizmetimizde:\n\n• Deneyimli ve eğitimli şoförler\n• GPS ile gerçek zamanlı takip\n• Sabah ve akşam düzenli seferler\n• Sigorta kapsamında güvenli yolculuk\n• Ebeveynlere anlık bildirimler\n\nÇocuğunuzun güvenliği bizim önceliğimizdir!',
+                    quickReplies: ['Fiyatlar nedir?', 'GPS takip nasıl çalışır?', 'Teklif istiyorum']
+                },
+                {
+                    keywords: ['personel', 'kurumsal', 'şirket', 'firma'],
+                    response: 'Personel servis hizmetimiz şunları kapsar:\n\n• Esnek rota planlaması\n• Konforlu ve modern araçlar\n• Zamanında alış-bırakış\n• Kurumunuza özel çözümler\n• Toplu taşıma verimliliği\n\nŞirketiniz için özel teklif almak ister misiniz?',
+                    quickReplies: ['Teklif istiyorum', 'Araç filosu', 'Fiyatlar']
+                },
+                {
+                    keywords: ['fiyat', 'ücret', 'maliyet', 'ne kadar', 'paket', 'fiyatlandırma'],
+                    response: 'Fiyat paketlerimiz:\n\n📦 <b>Temel Paket</b> - ₺2.500/ay\nGünlük servis, GPS takip, sigorta\n\n⭐ <b>Standart Paket</b> - ₺3.500/ay\nÖzel rota, mobil uygulama, öncelikli destek\n\n👑 <b>Premium Paket</b> - ₺5.000/ay\nVIP araç, kişisel koordinatör, esnek saatler\n\nDetaylı teklif için iletişime geçebilirsiniz!',
+                    quickReplies: ['Teklif istiyorum', 'Temel paket detayları', 'İletişim bilgileri']
+                },
+                {
+                    keywords: ['güvenlik', 'güvenli', 'emniyet', 'kamera', 'takip'],
+                    response: 'Güvenlik standartlarımız:\n\n📍 Gerçek zamanlı GPS takibi\n👨‍✈️ Denetimli ve eğitimli şoförler\n🛡️ Günlük araç kontrolleri\n📱 7/24 destek hattı\n✅ Sertifikalı araç filosu\n⏰ Zamanında hizmet garantisi\n\nGüvenliğiniz bizim en büyük önceliğimiz!',
+                    quickReplies: ['GPS nasıl çalışır?', 'Şoför eğitimleri', 'Hizmetleriniz']
+                },
+                {
+                    keywords: ['gps', 'konum', 'nerede', 'izleme'],
+                    response: 'GPS takip sistemimiz sayesinde:\n\n• Aracın anlık konumunu görebilirsiniz\n• Tahmini varış süresini öğrenebilirsiniz\n• Rota geçmişini inceleyebilirsiniz\n• Mobil uygulama üzerinden erişim sağlayabilirsiniz\n\nEbeveynler ve yöneticiler için büyük bir rahatlık!',
+                    quickReplies: ['Mobil uygulama var mı?', 'Güvenlik önlemleri', 'Teklif istiyorum']
+                },
+                {
+                    keywords: ['iletişim', 'telefon', 'adres', 'e-posta', 'mail', 'ulaşmak', 'aramak'],
+                    response: 'Bize ulaşabilirsiniz:\n\n📞 Telefon: (555) 123-4567\n✉️ E-posta: info@servisparkturizm.com\n\n📍 Merkez: Şeyh Şamil Mah. 137. Cadde 17361 Ada A1-3, Etimesgut/ANKARA\n📍 Şube: Ahi Evran Mah. Ahi Mesut Bulvarı 369B-1, Sincan/ANKARA\n\n🕒 Pzt-Cuma: 06:00-20:00 | Cmt: 08:00-16:00',
+                    quickReplies: ['Teklif istiyorum', 'Hizmetleriniz', 'Çalışma saatleri']
+                },
+                {
+                    keywords: ['saat', 'çalışma', 'açık', 'kapalı', 'mesai'],
+                    response: 'Çalışma saatlerimiz:\n\n🕒 Pazartesi - Cuma: 06:00 - 20:00\n🕒 Cumartesi: 08:00 - 16:00\n🕒 Pazar: Sadece Acil Servis\n\n⚡ 7/24 Acil Destek Hattımız her zaman aktiftir!',
+                    quickReplies: ['İletişim bilgileri', 'Hizmetleriniz', 'Teklif istiyorum']
+                },
+                {
+                    keywords: ['teklif', 'başvuru', 'kayıt', 'başlamak', 'istiyorum'],
+                    response: 'Teklif almak için birkaç seçeneğiniz var:\n\n1️⃣ Sayfamızdaki <b>İletişim Formu</b>nu doldurun\n2️⃣ Bizi <b>(555) 123-4567</b> numarasından arayın\n3️⃣ <b>info@servisparkturizm.com</b> adresine e-posta gönderin\n\nSizi en kısa sürede geri arayacağız!',
+                    quickReplies: ['İletişim formu nerede?', 'Fiyatlar', 'Hizmetleriniz']
+                },
+                {
+                    keywords: ['form', 'doldurmak'],
+                    response: 'İletişim formumuza sayfanın alt kısmındaki <b>İletişim</b> bölümünden ulaşabilirsiniz. Formu doldurup gönderdikten sonra ekibimiz en kısa sürede sizinle iletişime geçecektir.',
+                    quickReplies: ['İletişim bilgileri', 'Fiyatlar', 'Hizmetleriniz']
+                },
+                {
+                    keywords: ['araç', 'filo', 'otobüs', 'minibüs'],
+                    response: '150+ araçlık modern filomuz:\n\n🚌 Büyük otobüsler (40+ kişi)\n🚐 Minibüsler (15-25 kişi)\n🚗 VIP araçlar (özel hizmet)\n🚎 Okul servisleri (standart)\n\nTüm araçlarımız düzenli bakımdan geçer ve en son güvenlik donanımlarıyla donatılmıştır.',
+                    quickReplies: ['Güvenlik önlemleri', 'Fiyatlar', 'Teklif istiyorum']
+                },
+                {
+                    keywords: ['şoför', 'sürücü', 'eğitim'],
+                    response: 'Şoförlerimiz hakkında:\n\n• Kapsamlı geçmiş kontrolü yapılır\n• İlk yardım sertifikası zorunludur\n• Çocuk psikolojisi eğitimi verilir\n• Düzenli yenileme eğitimleri yapılır\n• Uyuşturucu ve alkol testleri uygulanır\n\nSadece en nitelikli sürücülerle çalışıyoruz!',
+                    quickReplies: ['Güvenlik önlemleri', 'Hizmetleriniz', 'Teklif istiyorum']
+                },
+                {
+                    keywords: ['teşekkür', 'sağol', 'sağ ol', 'eyvallah'],
+                    response: 'Rica ederim! Başka bir sorunuz olursa her zaman buradayım. ServisPark Turizm olarak size yardımcı olmaktan memnuniyet duyarız! 😊',
+                    quickReplies: ['Hizmetleriniz', 'Fiyatlar', 'İletişim bilgileri']
+                },
+                {
+                    keywords: ['uygulama', 'mobil', 'app'],
+                    response: 'Standart ve Premium paketlerimizde mobil uygulama erişimi sunuyoruz. Uygulama üzerinden:\n\n• Araç takibi yapabilirsiniz\n• Sürücünüzle iletişim kurabilirsiniz\n• Varış sürelerini görebilirsiniz\n• Bildirimler alabilirsiniz',
+                    quickReplies: ['Paket fiyatları', 'GPS takip', 'Teklif istiyorum']
+                }
+            ];
+
+            const defaultResponse = {
+                response: 'Anlıyorum. Bu konuda size daha iyi yardımcı olabilmem için lütfen aşağıdaki seçeneklerden birini seçin veya doğrudan bizi arayın: <b>(555) 123-4567</b>',
+                quickReplies: ['Hizmetleriniz neler?', 'Fiyatlar hakkında bilgi', 'Güvenlik önlemleri', 'İletişim bilgileri']
+            };
+
+            function addMessage(text, sender) {
+                const msg = document.createElement('div');
+                msg.className = 'chat-message ' + sender;
+                msg.innerHTML = text.replace(/\n/g, '<br>');
+                chatbotMessages.appendChild(msg);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            function showTyping() {
+                const msg = document.createElement('div');
+                msg.className = 'chat-message bot typing';
+                msg.id = 'typingIndicator';
+                msg.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+                chatbotMessages.appendChild(msg);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            function removeTyping() {
+                const typing = document.getElementById('typingIndicator');
+                if (typing) typing.remove();
+            }
+
+            function setQuickReplies(replies) {
+                quickReplies.innerHTML = '';
+                if (!replies || replies.length === 0) return;
+                replies.forEach(function(text) {
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-reply-btn';
+                    btn.textContent = text;
+                    btn.addEventListener('click', function() {
+                        handleUserMessage(text);
+                    });
+                    quickReplies.appendChild(btn);
+                });
+            }
+
+            function findResponse(input) {
+                const lower = input.toLowerCase().replace(/[?!.,]/g, '');
+                let bestMatch = null;
+                let bestScore = 0;
+
+                for (var i = 0; i < knowledgeBase.length; i++) {
+                    var entry = knowledgeBase[i];
+                    var score = 0;
+                    for (var j = 0; j < entry.keywords.length; j++) {
+                        if (lower.includes(entry.keywords[j])) {
+                            score += entry.keywords[j].length;
+                        }
+                    }
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMatch = entry;
+                    }
+                }
+
+                return bestScore > 0 ? bestMatch : defaultResponse;
+            }
+
+            function handleUserMessage(text) {
+                if (!text.trim()) return;
+                addMessage(text, 'user');
+                chatbotInput.value = '';
+                quickReplies.innerHTML = '';
+
+                showTyping();
+
+                var delay = 600 + Math.random() * 800;
+                setTimeout(function() {
+                    removeTyping();
+                    var match = findResponse(text);
+                    addMessage(match.response, 'bot');
+                    setQuickReplies(match.quickReplies);
+                }, delay);
+            }
+
+            function toggleChat() {
+                isOpen = !isOpen;
+                chatbotWindow.classList.toggle('open', isOpen);
+                chatbotToggle.classList.toggle('active', isOpen);
+
+                if (isOpen) {
+                    chatbotBadge.style.display = 'none';
+                    chatbotInput.focus();
+
+                    if (firstOpen) {
+                        firstOpen = false;
+                        setTimeout(function() {
+                            addMessage('Merhaba! Ben <b>ServisBot</b>, ServisPark Turizm\'in dijital asistanıyım. 👋\n\nSize hizmetlerimiz, fiyatlarımız veya güvenlik standartlarımız hakkında bilgi verebilirim. Nasıl yardımcı olabilirim?', 'bot');
+                            setQuickReplies(['Hizmetleriniz neler?', 'Fiyatlar hakkında bilgi', 'Güvenlik önlemleri', 'İletişim bilgileri']);
+                        }, 400);
+                    }
+                }
+            }
+
+            chatbotToggle.addEventListener('click', toggleChat);
+            chatbotClose.addEventListener('click', function() {
+                isOpen = false;
+                chatbotWindow.classList.remove('open');
+                chatbotToggle.classList.remove('active');
+            });
+
+            chatbotSend.addEventListener('click', function() {
+                handleUserMessage(chatbotInput.value);
+            });
+
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleUserMessage(chatbotInput.value);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
