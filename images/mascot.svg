@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240">
+  <defs>
+    <style>
+      .body{fill:#4A8EF7}
+      .face{fill:#fff}
+      .eye{fill:#4A8EF7}
+    </style>
+  </defs>
+  <!-- Hair bumps -->
+  <circle cx="65" cy="48" r="20" class="body"/>
+  <circle cx="100" cy="38" r="22" class="body"/>
+  <circle cx="135" cy="48" r="20" class="body"/>
+  <!-- Body -->
+  <rect x="38" y="50" width="124" height="140" rx="28" class="body"/>
+  <!-- Legs -->
+  <rect x="60" y="180" width="24" height="40" rx="12" class="body"/>
+  <rect x="116" y="180" width="24" height="40" rx="12" class="body"/>
+  <!-- Face visor -->
+  <rect x="52" y="62" width="96" height="58" rx="24" class="face"/>
+  <!-- Left eye -->
+  <ellipse cx="80" cy="86" rx="12" ry="15" class="eye"/>
+  <!-- Right eye -->
+  <ellipse cx="120" cy="86" rx="12" ry="15" class="eye"/>
+  <!-- Smile -->
+  <path d="M88 104 Q100 114 112 104" stroke="#4A8EF7" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Tie -->
+  <polygon points="100,125 93,138 100,148 107,138" class="face"/>
+  <!-- Jacket V-lines -->
+  <line x1="100" y1="125" x2="50" y2="190" stroke="#fff" stroke-width="2.2" opacity="0.9"/>
+  <line x1="100" y1="125" x2="150" y2="190" stroke="#fff" stroke-width="2.2" opacity="0.9"/>
+</svg>

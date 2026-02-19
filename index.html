@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServisPark Turizm - Okul Servisi & Servis Hizmetleri</title>
+    <title>ServisBot - Okul Servisi & Servis Hizmetleri</title>
+    <link rel="icon" type="image/svg+xml" href="images/mascot.svg">
     <style>
         * {
             margin: 0;
@@ -55,6 +56,14 @@
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
         }
 
         .nav-links {
@@ -892,6 +901,11 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         /* ===== ServisBot Panel System ===== */
@@ -1864,13 +1878,16 @@
 <body>
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
+        <div style="text-align:center;">
+            <img src="images/mascot.svg" alt="ServisBot" style="width:80px;height:auto;margin-bottom:1rem;animation:bounce 1s ease infinite;">
+            <div class="spinner"></div>
+        </div>
     </div>
 
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">🚌 ServisPark Turizm</a>
+            <a href="#" class="logo"><img src="images/logo-white.svg" alt="ServisBot" class="logo-img"></a>
             <ul class="nav-links">
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#services">Hizmetler</a></li>
@@ -1902,6 +1919,7 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
+            <img src="images/mascot.svg" alt="ServisBot Maskot" style="width:100px;height:auto;margin-bottom:1.5rem;filter:drop-shadow(0 4px 15px rgba(0,0,0,0.3));animation:fadeInUp 0.8s ease;">
             <h1>Güvenli, Güvenilir ve Zamanında Ulaşım</h1>
             <p>Okul servisi ve servis hizmetlerinde güvenilir ortağınız. Güvenliği önceliklendiriyor, güven inşa ediyor ve her yolculukta zamanında hizmet sağlıyoruz.</p>
             <a href="#contact" class="cta-button">Teklif İste</a>
@@ -2016,7 +2034,7 @@
             <p class="section-subtitle">Bölgedeki okul ve kuruluşlar tarafından güvenilen</p>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"SafeRide Transport üç yıldır okulumuzun ulaşım ortağı. Güvenlik ve zamanında hizmet konusundaki bağlılıkları eşsiz. Ebeveynler çocuklarının güvenli ellerde olduğunu bilerek kendilerini güvende hissediyorlar."</p>
+                    <p class="testimonial-text">"ServisBot üç yıldır okulumuzun ulaşım ortağı. Güvenlik ve zamanında hizmet konusundaki bağlılıkları eşsiz. Ebeveynler çocuklarının güvenli ellerde olduğunu bilerek kendilerini güvende hissediyorlar."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">AY</div>
                         <div class="author-info">
@@ -2036,7 +2054,7 @@
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Kurumsal servis hizmetimiz sorunsuz geçiyor. Personel konforlu yolculukları ve zamanında hizmeti takdir ediyor. SafeRide operasyonlarımızın vazgeçilmez bir parçası haline geldi."</p>
+                    <p class="testimonial-text">"Kurumsal servis hizmetimiz sorunsuz geçiyor. Personel konforlu yolculukları ve zamanında hizmeti takdir ediyor. ServisBot operasyonlarımızın vazgeçilmez bir parçası haline geldi."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">ZD</div>
                         <div class="author-info">
@@ -2187,8 +2205,9 @@
                     <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Servis yönetim sistemimizi ücretsiz deneyin. Ekibimiz sizinle iletişime geçecektir.</p>
                     <div class="sp-demo-section">
                         <div class="sp-demo-info">
-                            <h3>Neden ServisPark?</h3>
-                            <p>ServisPark Turizm yönetim sistemi ile tüm servis operasyonlarınızı dijitalleştirin.</p>
+                            <img src="images/mascot.svg" alt="ServisBot" style="width:60px;height:auto;margin-bottom:1rem;filter:brightness(10);">
+                            <h3>Neden ServisBot?</h3>
+                            <p>ServisBot yönetim sistemi ile tüm servis operasyonlarınızı dijitalleştirin.</p>
                             <ul class="sp-demo-features">
                                 <li>✓ Gerçek zamanlı GPS takip sistemi</li>
                                 <li>✓ Otomatik yoklama ve bildirim</li>
@@ -2420,7 +2439,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>ServisPark Turizm</h3>
+                <img src="images/logo-white.svg" alt="ServisBot" style="height:32px;width:auto;margin-bottom:0.75rem;">
                 <p>Güvenli, güvenilir ve zamanında ulaşım hizmetleri sunan öncü kuruluş. 25 yıllık deneyimimizle sizlere hizmet vermekten gurur duyuyoruz.</p>
                 <div class="social-links">
                     <a href="#" class="social-link" title="Facebook">📘</a>
@@ -2456,7 +2475,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 ServisPark Turizm. Tüm hakları saklıdır. | Güvenlik • Güven • Zamanında Hizmet</p>
+            <p>&copy; 2025 ServisBot. Tüm hakları saklıdır. | Güvenlik • Güven • Zamanında Hizmet</p>
         </div>
     </footer>
 
@@ -2467,14 +2486,14 @@
     <script src="dist/app.js"></script>
 
     <!-- Chatbot -->
-    <button class="chatbot-toggle" id="chatbotToggle" title="ServisBot ile Konuşun">
-        💬
+    <button class="chatbot-toggle" id="chatbotToggle" title="ServisBot ile Konuşun" style="padding:8px;">
+        <img src="images/mascot.svg" alt="ServisBot" style="width:38px;height:38px;">
         <span class="chatbot-badge" id="chatbotBadge">1</span>
     </button>
 
     <div class="chatbot-window" id="chatbotWindow">
         <div class="chatbot-header">
-            <div class="chatbot-avatar">🤖</div>
+            <div class="chatbot-avatar" style="padding:3px;"><img src="images/mascot.svg" alt="ServisBot" style="width:100%;height:100%;"></div>
             <div class="chatbot-header-info">
                 <h4>ServisBot</h4>
                 <p><span class="chatbot-status"></span>Çevrimiçi</p>
@@ -2637,12 +2656,12 @@
             const knowledgeBase = [
                 {
                     keywords: ['merhaba', 'selam', 'hey', 'günaydın', 'iyi günler', 'iyi akşamlar'],
-                    response: 'Merhaba! ServisPark Turizm\'e hoş geldiniz. Size nasıl yardımcı olabilirim?',
+                    response: 'Merhaba! ServisBot\'a hoş geldiniz. Size nasıl yardımcı olabilirim?',
                     quickReplies: ['Hizmetleriniz neler?', 'Fiyatlar hakkında bilgi', 'Güvenlik önlemleri', 'İletişim bilgileri']
                 },
                 {
                     keywords: ['hizmet', 'servis', 'ne yapıyorsunuz', 'neler sunuyorsunuz', 'hizmetleriniz'],
-                    response: 'ServisPark Turizm olarak 3 ana hizmet sunuyoruz:\n\n🎒 <b>Öğrenci Taşımacılığı</b> - Okula gidiş-dönüş güvenli servis\n👔 <b>Personel Servisleri</b> - Kurumsal ulaşım çözümleri\n⭐ <b>Özel Etkinlikler</b> - Gezi ve etkinlik taşımacılığı\n\nHangi hizmet hakkında daha fazla bilgi almak istersiniz?',
+                    response: 'ServisBot olarak 3 ana hizmet sunuyoruz:\n\n🎒 <b>Öğrenci Taşımacılığı</b> - Okula gidiş-dönüş güvenli servis\n👔 <b>Personel Servisleri</b> - Kurumsal ulaşım çözümleri\n⭐ <b>Özel Etkinlikler</b> - Gezi ve etkinlik taşımacılığı\n\nHangi hizmet hakkında daha fazla bilgi almak istersiniz?',
                     quickReplies: ['Öğrenci servisi', 'Personel servisi', 'Fiyatlar', 'Teklif istiyorum']
                 },
                 {
@@ -2702,7 +2721,7 @@
                 },
                 {
                     keywords: ['teşekkür', 'sağol', 'sağ ol', 'eyvallah'],
-                    response: 'Rica ederim! Başka bir sorunuz olursa her zaman buradayım. ServisPark Turizm olarak size yardımcı olmaktan memnuniyet duyarız! 😊',
+                    response: 'Rica ederim! Başka bir sorunuz olursa her zaman buradayım. ServisBot olarak size yardımcı olmaktan memnuniyet duyarız! 😊',
                     quickReplies: ['Hizmetleriniz', 'Fiyatlar', 'İletişim bilgileri']
                 },
                 {
@@ -2804,7 +2823,7 @@
                     if (firstOpen) {
                         firstOpen = false;
                         setTimeout(function() {
-                            addMessage('Merhaba! Ben <b>ServisBot</b>, ServisPark Turizm\'in dijital asistanıyım. 👋\n\nSize hizmetlerimiz, fiyatlarımız veya güvenlik standartlarımız hakkında bilgi verebilirim. Nasıl yardımcı olabilirim?', 'bot');
+                            addMessage('Merhaba! Ben <b>ServisBot</b>, ServisBot\'un dijital asistanıyım. 👋\n\nSize hizmetlerimiz, fiyatlarımız veya güvenlik standartlarımız hakkında bilgi verebilirim. Nasıl yardımcı olabilirim?', 'bot');
                             setQuickReplies(['Hizmetleriniz neler?', 'Fiyatlar hakkında bilgi', 'Güvenlik önlemleri', 'İletişim bilgileri']);
                         }, 400);
                     }
