@@ -1,4 +1,4 @@
-import type { Student, Route, RouteStop, Activity } from './types';
+import type { Student, Route, RouteStop, Activity, VehicleStatus, ParentNotification, ReportSummary, WeeklyAttendanceData, RoutePerformance } from './types';
 
 const stopNames = [
   'Şeyh Şamil Mahallesi', 'Ahi Evran Mahallesi', 'Eryaman 1. Etap',
@@ -82,3 +82,76 @@ export const driverList = [
   { id: 'd4', name: 'Ali Kara', plate: '06 JKL 012', route: 'Çayyolu - Ümitköy', avatar: 'AK' },
   { id: 'd5', name: 'Ömer Aksoy', plate: '06 MNO 345', route: 'Bağlıca - Yapracık', avatar: 'ÖA' },
 ];
+
+export function generateVehicleStatuses(): VehicleStatus[] {
+  const now = new Date();
+  const statuses: ('active' | 'idle' | 'maintenance' | 'returning')[] = ['active', 'active', 'active', 'idle', 'returning'];
+  return routes.map((r, i) => ({
+    id: `v-${i + 1}`,
+    plate: r.vehiclePlate,
+    driverName: r.driverName,
+    routeName: r.name,
+    status: statuses[i],
+    position: {
+      lat: 39.92 + Math.random() * 0.08,
+      lng: 32.75 + Math.random() * 0.15,
+      speed: statuses[i] === 'active' ? 25 + Math.floor(Math.random() * 35) : 0,
+      heading: Math.floor(Math.random() * 360)
+    },
+    lastUpdate: new Date(now.getTime() - Math.floor(Math.random() * 300000)),
+    studentsOnBoard: statuses[i] === 'active' ? 12 + Math.floor(Math.random() * 16) : 0,
+    capacity: 28 + Math.floor(Math.random() * 8),
+    nextStop: r.stops[Math.floor(Math.random() * r.stops.length)]?.name ?? 'Bilinmiyor',
+    eta: statuses[i] === 'active' ? `${3 + Math.floor(Math.random() * 12)} dk` : '-',
+    fuelLevel: 40 + Math.floor(Math.random() * 55)
+  }));
+}
+
+export function generateNotifications(): ParentNotification[] {
+  const now = Date.now();
+  return [
+    { id: 'n1', type: 'arrival', title: 'Servis Yaklaşıyor', message: 'Elif\'in servisi 3 dakika içinde durağa ulaşacaktır.', studentName: 'Elif Yılmaz', parentName: 'Ayşe Yılmaz', parentPhone: '(532) 100-4000', timestamp: new Date(now - 5 * 60000), read: false, priority: 'medium' },
+    { id: 'n2', type: 'departure', title: 'Okula Vardı', message: 'Yusuf okula güvenle ulaşmıştır. İyi dersler!', studentName: 'Yusuf Kaya', parentName: 'Mehmet Kaya', parentPhone: '(533) 103-4007', timestamp: new Date(now - 25 * 60000), read: true, priority: 'low' },
+    { id: 'n3', type: 'delay', title: 'Servis Gecikmesi', message: 'Trafik yoğunluğu nedeniyle Zeynep\'in servisi yaklaşık 10 dakika gecikecektir.', studentName: 'Zeynep Demir', parentName: 'Fatma Demir', parentPhone: '(534) 106-4014', timestamp: new Date(now - 45 * 60000), read: false, priority: 'high' },
+    { id: 'n4', type: 'absence', title: 'Devamsızlık Bildirimi', message: 'Mehmet bugünkü yoklamada devamsız olarak işaretlenmiştir.', studentName: 'Mehmet Çelik', parentName: 'Ali Çelik', parentPhone: '(535) 109-4021', timestamp: new Date(now - 2 * 3600000), read: true, priority: 'medium' },
+    { id: 'n5', type: 'route_change', title: 'Güzergah Değişikliği', message: 'Ayşe\'nin güzergahına Yapracık durağı eklenmiştir. Yeni tahmini varış: 07:45', studentName: 'Ayşe Şahin', parentName: 'Hasan Şahin', parentPhone: '(536) 112-4028', timestamp: new Date(now - 4 * 3600000), read: false, priority: 'medium' },
+    { id: 'n6', type: 'emergency', title: 'Acil Durum Bildirimi', message: 'Burak\'ın servisinde küçük bir arıza tespit edildi. Yedek araç gönderildi, 15 dk gecikme bekleniyor.', studentName: 'Burak Arslan', parentName: 'Kemal Arslan', parentPhone: '(537) 115-4035', timestamp: new Date(now - 5 * 3600000), read: false, priority: 'urgent' },
+    { id: 'n7', type: 'general', title: 'Haftalık Rapor', message: 'Defne bu hafta %100 devam oranı ile tüm seferlere katıldı. Tebrikler!', studentName: 'Defne Doğan', parentName: 'Sema Doğan', parentPhone: '(538) 118-4042', timestamp: new Date(now - 24 * 3600000), read: true, priority: 'low' },
+    { id: 'n8', type: 'arrival', title: 'Eve Yaklaşıyor', message: 'Emre\'nin servisi durağa 5 dakika içinde varacaktır.', studentName: 'Emre Kılıç', parentName: 'Veli Kılıç', parentPhone: '(539) 121-4049', timestamp: new Date(now - 26 * 3600000), read: true, priority: 'medium' },
+    { id: 'n9', type: 'delay', title: 'Sabah Seferi Gecikmesi', message: 'Selin\'in sabah seferi yol çalışması nedeniyle 7 dakika gecikecektir.', studentName: 'Selin Aslan', parentName: 'Deniz Aslan', parentPhone: '(540) 124-4056', timestamp: new Date(now - 30 * 3600000), read: true, priority: 'high' },
+    { id: 'n10', type: 'general', title: 'Servis Ücreti Hatırlatma', message: 'Kaan\'ın Mart ayı servis ücreti son ödeme tarihi 5 Mart\'tır.', studentName: 'Kaan Aydın', parentName: 'Selim Aydın', parentPhone: '(541) 127-4063', timestamp: new Date(now - 48 * 3600000), read: false, priority: 'low' },
+  ];
+}
+
+export function getReportSummary(): ReportSummary {
+  return {
+    totalStudents: 156,
+    activeRoutes: 5,
+    avgAttendance: 94.7,
+    totalTripsToday: 10,
+    onTimePercentage: 91.3,
+    activeVehicles: 4,
+    totalDrivers: 5,
+    avgDriverRating: 4.6
+  };
+}
+
+export function getWeeklyAttendance(): WeeklyAttendanceData[] {
+  return [
+    { day: 'Pazartesi', present: 142, absent: 14, total: 156 },
+    { day: 'Salı', present: 148, absent: 8, total: 156 },
+    { day: 'Çarşamba', present: 145, absent: 11, total: 156 },
+    { day: 'Perşembe', present: 150, absent: 6, total: 156 },
+    { day: 'Cuma', present: 138, absent: 18, total: 156 },
+  ];
+}
+
+export function getRoutePerformances(): RoutePerformance[] {
+  return [
+    { routeName: 'Etimesgut - Merkez', onTimeRate: 94.2, avgDelay: 2.3, studentCount: 28, tripCount: 42, satisfaction: 4.8 },
+    { routeName: 'Sincan - Batıkent', onTimeRate: 88.5, avgDelay: 4.1, studentCount: 32, tripCount: 40, satisfaction: 4.5 },
+    { routeName: 'Eryaman - Elvankent', onTimeRate: 96.1, avgDelay: 1.2, studentCount: 35, tripCount: 44, satisfaction: 4.9 },
+    { routeName: 'Çayyolu - Ümitköy', onTimeRate: 91.7, avgDelay: 3.0, studentCount: 30, tripCount: 38, satisfaction: 4.6 },
+    { routeName: 'Bağlıca - Yapracık', onTimeRate: 93.4, avgDelay: 2.7, studentCount: 31, tripCount: 41, satisfaction: 4.7 },
+  ];
+}
