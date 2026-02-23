@@ -7,6 +7,11 @@ import { initRouteCheck } from './routeCheck';
 import { initVehicleTracking } from './vehicleTracking';
 import { initParentNotifications } from './parentNotifications';
 import { initReporting } from './reporting';
+import { initPayments } from './payments';
+import { initParentPortal } from './parentPortal';
+import { initMessaging } from './messaging';
+import { initMaintenance } from './maintenance';
+import { initStudentManagement } from './studentManagement';
 
 function initTabSystem(): void {
   const tabBtns = document.querySelectorAll<HTMLButtonElement>('.sp-tab-btn');
@@ -37,6 +42,11 @@ function init(): void {
   initVehicleTracking();
   initParentNotifications();
   initReporting();
+  initPayments();
+  initParentPortal();
+  initMessaging();
+  initMaintenance();
+  initStudentManagement();
 }
 
 if (document.readyState === 'loading') {

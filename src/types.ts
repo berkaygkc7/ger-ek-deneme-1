@@ -127,3 +127,83 @@ export interface RoutePerformance {
   tripCount: number;
   satisfaction: number;
 }
+
+export interface Payment {
+  id: string;
+  studentId: string;
+  studentName: string;
+  parentName: string;
+  amount: number;
+  month: string;
+  dueDate: string;
+  paidDate: string | null;
+  status: 'paid' | 'pending' | 'overdue' | 'partial';
+  method: 'credit_card' | 'bank_transfer' | 'cash' | 'auto_debit' | null;
+  invoiceNo: string;
+}
+
+export interface PaymentSummary {
+  totalRevenue: number;
+  collected: number;
+  pending: number;
+  overdue: number;
+  collectionRate: number;
+}
+
+export interface ChatMessage {
+  id: string;
+  channelId: string;
+  sender: string;
+  senderRole: 'admin' | 'driver' | 'parent';
+  senderAvatar: string;
+  text: string;
+  timestamp: Date;
+  read: boolean;
+}
+
+export interface ChatChannel {
+  id: string;
+  name: string;
+  type: 'direct' | 'group' | 'announcement';
+  participants: string[];
+  lastMessage: string;
+  lastMessageTime: Date;
+  unreadCount: number;
+  avatar: string;
+}
+
+export interface MaintenanceRecord {
+  id: string;
+  vehicleId: string;
+  vehiclePlate: string;
+  type: 'periodic' | 'repair' | 'tire' | 'brake' | 'oil' | 'inspection' | 'cleaning';
+  description: string;
+  status: 'scheduled' | 'in_progress' | 'completed' | 'cancelled';
+  scheduledDate: string;
+  completedDate: string | null;
+  cost: number;
+  vendor: string;
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  nextDue: string | null;
+  odometer: number;
+}
+
+export interface StudentFull {
+  id: string;
+  name: string;
+  className: string;
+  routeId: string;
+  routeName: string;
+  stopName: string;
+  parentName: string;
+  parentPhone: string;
+  parentEmail: string;
+  address: string;
+  bloodType: string;
+  allergies: string;
+  emergencyContact: string;
+  enrollmentDate: string;
+  isActive: boolean;
+  photoInitials: string;
+  notes: string;
+}

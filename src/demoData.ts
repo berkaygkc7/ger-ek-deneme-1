@@ -1,4 +1,4 @@
-import type { Student, Route, RouteStop, Activity, VehicleStatus, ParentNotification, ReportSummary, WeeklyAttendanceData, RoutePerformance } from './types';
+import type { Student, Route, RouteStop, Activity, VehicleStatus, ParentNotification, ReportSummary, WeeklyAttendanceData, RoutePerformance, Payment, PaymentSummary, ChatChannel, ChatMessage, MaintenanceRecord, StudentFull } from './types';
 
 const stopNames = [
   'Şeyh Şamil Mahallesi', 'Ahi Evran Mahallesi', 'Eryaman 1. Etap',
@@ -154,4 +154,121 @@ export function getRoutePerformances(): RoutePerformance[] {
     { routeName: 'Çayyolu - Ümitköy', onTimeRate: 91.7, avgDelay: 3.0, studentCount: 30, tripCount: 38, satisfaction: 4.6 },
     { routeName: 'Bağlıca - Yapracık', onTimeRate: 93.4, avgDelay: 2.7, studentCount: 31, tripCount: 41, satisfaction: 4.7 },
   ];
+}
+
+const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs'];
+const payStatuses: Payment['status'][] = ['paid', 'paid', 'paid', 'pending', 'overdue', 'paid', 'paid', 'partial', 'paid', 'pending'];
+const payMethods: Payment['method'][] = ['credit_card', 'bank_transfer', 'cash', 'auto_debit', null, 'credit_card', 'bank_transfer', null, 'auto_debit', null];
+
+export function generatePayments(): Payment[] {
+  return students.slice(0, 20).flatMap((s, si) => {
+    return months.map((m, mi) => {
+      const status = payStatuses[(si + mi) % payStatuses.length];
+      return {
+        id: `pay-${si}-${mi}`,
+        studentId: s.id,
+        studentName: s.name,
+        parentName: `${firstNames[(si + 5) % firstNames.length]} ${lastNames[si % lastNames.length]}`,
+        amount: 2500 + (si % 3) * 500,
+        month: `${m} 2026`,
+        dueDate: `2026-${String(mi + 1).padStart(2, '0')}-05`,
+        paidDate: status === 'paid' ? `2026-${String(mi + 1).padStart(2, '0')}-0${2 + (si % 3)}` : status === 'partial' ? `2026-${String(mi + 1).padStart(2, '0')}-08` : null,
+        status,
+        method: status === 'paid' || status === 'partial' ? payMethods[si % payMethods.length] : null,
+        invoiceNo: `SRV-2026-${String(si * 5 + mi + 1).padStart(4, '0')}`
+      };
+    });
+  });
+}
+
+export function getPaymentSummary(): PaymentSummary {
+  return { totalRevenue: 390000, collected: 312000, pending: 52000, overdue: 26000, collectionRate: 80 };
+}
+
+export function generateChannels(): ChatChannel[] {
+  const now = Date.now();
+  return [
+    { id: 'ch1', name: 'Ahmet Çelik (Şoför)', type: 'direct', participants: ['admin', 'Ahmet Çelik'], lastMessage: 'Sabah seferi sorunsuz tamamlandı.', lastMessageTime: new Date(now - 10 * 60000), unreadCount: 0, avatar: 'AÇ' },
+    { id: 'ch2', name: 'Ayşe Yılmaz (Veli)', type: 'direct', participants: ['admin', 'Ayşe Yılmaz'], lastMessage: 'Elif yarın servise binmeyecek, bilginize.', lastMessageTime: new Date(now - 35 * 60000), unreadCount: 2, avatar: 'AY' },
+    { id: 'ch3', name: 'Tüm Şoförler', type: 'group', participants: ['admin', 'Ahmet Çelik', 'Mustafa Demir', 'Hasan Yıldız', 'Ali Kara', 'Ömer Aksoy'], lastMessage: 'Yarınki yoğun trafik için alternatif rotalar paylaşıldı.', lastMessageTime: new Date(now - 2 * 3600000), unreadCount: 0, avatar: '🚌' },
+    { id: 'ch4', name: 'Duyurular', type: 'announcement', participants: ['admin', 'all'], lastMessage: 'Mart ayı servis ücretleri 5 Mart son ödeme tarihlidir.', lastMessageTime: new Date(now - 6 * 3600000), unreadCount: 0, avatar: '📢' },
+    { id: 'ch5', name: 'Mehmet Kaya (Veli)', type: 'direct', participants: ['admin', 'Mehmet Kaya'], lastMessage: 'Yusuf\'un adresini güncellememiz gerekiyor.', lastMessageTime: new Date(now - 8 * 3600000), unreadCount: 1, avatar: 'MK' },
+    { id: 'ch6', name: 'Mustafa Demir (Şoför)', type: 'direct', participants: ['admin', 'Mustafa Demir'], lastMessage: 'Aracın sağ aynası çizildi, bilginize.', lastMessageTime: new Date(now - 12 * 3600000), unreadCount: 0, avatar: 'MD' },
+    { id: 'ch7', name: 'Etimesgut Velileri', type: 'group', participants: ['admin', 'Ayşe Yılmaz', 'Ali Çelik', 'Hasan Şahin'], lastMessage: 'Pazartesi servis saatleri güncellendi.', lastMessageTime: new Date(now - 24 * 3600000), unreadCount: 3, avatar: '👨‍👩‍👧' },
+  ];
+}
+
+export function generateMessages(channelId: string): ChatMessage[] {
+  const now = Date.now();
+  const allMessages: Record<string, ChatMessage[]> = {
+    ch1: [
+      { id: 'm1', channelId: 'ch1', sender: 'Ahmet Çelik', senderRole: 'driver', senderAvatar: 'AÇ', text: 'Günaydın, sabah seferine başlıyorum.', timestamp: new Date(now - 3 * 3600000), read: true },
+      { id: 'm2', channelId: 'ch1', sender: 'Yönetici', senderRole: 'admin', senderAvatar: 'YN', text: 'Günaydın Ahmet bey, dikkatli olun. Eryaman kavşağında çalışma var.', timestamp: new Date(now - 2.5 * 3600000), read: true },
+      { id: 'm3', channelId: 'ch1', sender: 'Ahmet Çelik', senderRole: 'driver', senderAvatar: 'AÇ', text: 'Teşekkürler, alternatif rotadan gideceğim.', timestamp: new Date(now - 2 * 3600000), read: true },
+      { id: 'm4', channelId: 'ch1', sender: 'Ahmet Çelik', senderRole: 'driver', senderAvatar: 'AÇ', text: 'Sabah seferi sorunsuz tamamlandı.', timestamp: new Date(now - 10 * 60000), read: true },
+    ],
+    ch2: [
+      { id: 'm5', channelId: 'ch2', sender: 'Ayşe Yılmaz', senderRole: 'parent', senderAvatar: 'AY', text: 'Merhaba, Elif yarın doktor randevusu nedeniyle servise binmeyecek.', timestamp: new Date(now - 40 * 60000), read: true },
+      { id: 'm6', channelId: 'ch2', sender: 'Yönetici', senderRole: 'admin', senderAvatar: 'YN', text: 'Anlaşıldı, şoförü bilgilendireceğim. Geçmiş olsun.', timestamp: new Date(now - 38 * 60000), read: true },
+      { id: 'm7', channelId: 'ch2', sender: 'Ayşe Yılmaz', senderRole: 'parent', senderAvatar: 'AY', text: 'Elif yarın servise binmeyecek, bilginize.', timestamp: new Date(now - 35 * 60000), read: false },
+      { id: 'm8', channelId: 'ch2', sender: 'Ayşe Yılmaz', senderRole: 'parent', senderAvatar: 'AY', text: 'Bir de Mart ayı ücretini hangi hesaba yatıracağız?', timestamp: new Date(now - 34 * 60000), read: false },
+    ],
+    ch5: [
+      { id: 'm9', channelId: 'ch5', sender: 'Mehmet Kaya', senderRole: 'parent', senderAvatar: 'MK', text: 'Merhaba, Yusuf\'un adresini güncelledik. Yeni adres: Batıkent 3. Cadde No:42', timestamp: new Date(now - 8 * 3600000), read: false },
+    ],
+  };
+  return allMessages[channelId] ?? [
+    { id: `mg-${channelId}`, channelId, sender: 'Sistem', senderRole: 'admin', senderAvatar: '🤖', text: 'Bu kanalda henüz mesaj bulunmuyor.', timestamp: new Date(now - 24 * 3600000), read: true }
+  ];
+}
+
+const maintenanceTypes: MaintenanceRecord['type'][] = ['periodic', 'repair', 'tire', 'brake', 'oil', 'inspection', 'cleaning'];
+const typeLabelsMap: Record<string, string> = { periodic: 'Periyodik Bakım', repair: 'Onarım', tire: 'Lastik', brake: 'Fren', oil: 'Yağ Değişimi', inspection: 'Muayene', cleaning: 'Temizlik' };
+const vendors = ['Ankara Oto Servis', 'Güvenli Fren Ltd.', 'MasterTire', 'FleetCare Pro', 'Hızlı Bakım'];
+
+export function generateMaintenanceRecords(): MaintenanceRecord[] {
+  const plates = routes.map(r => r.vehiclePlate);
+  return [
+    { id: 'mt1', vehicleId: 'v-1', vehiclePlate: plates[0], type: 'periodic', description: '50.000 km periyodik bakım - filtre, yağ, kayış kontrolü', status: 'completed', scheduledDate: '2026-02-10', completedDate: '2026-02-10', cost: 4500, vendor: vendors[0], priority: 'medium', nextDue: '2026-05-10', odometer: 50120 },
+    { id: 'mt2', vehicleId: 'v-2', vehiclePlate: plates[1], type: 'tire', description: '4 adet kış lastiği değişimi', status: 'completed', scheduledDate: '2026-01-15', completedDate: '2026-01-15', cost: 8200, vendor: vendors[2], priority: 'high', nextDue: '2026-11-01', odometer: 42300 },
+    { id: 'mt3', vehicleId: 'v-3', vehiclePlate: plates[2], type: 'brake', description: 'Ön fren balataları ve diskler değişimi', status: 'in_progress', scheduledDate: '2026-02-23', completedDate: null, cost: 3200, vendor: vendors[1], priority: 'urgent', nextDue: null, odometer: 67800 },
+    { id: 'mt4', vehicleId: 'v-4', vehiclePlate: plates[3], type: 'inspection', description: 'Yıllık araç muayenesi', status: 'scheduled', scheduledDate: '2026-03-05', completedDate: null, cost: 1200, vendor: vendors[3], priority: 'high', nextDue: null, odometer: 38500 },
+    { id: 'mt5', vehicleId: 'v-5', vehiclePlate: plates[4], type: 'oil', description: 'Motor yağı ve filtre değişimi', status: 'completed', scheduledDate: '2026-02-01', completedDate: '2026-02-01', cost: 1800, vendor: vendors[0], priority: 'medium', nextDue: '2026-05-01', odometer: 55200 },
+    { id: 'mt6', vehicleId: 'v-1', vehiclePlate: plates[0], type: 'cleaning', description: 'İç-dış detaylı temizlik ve dezenfeksiyon', status: 'completed', scheduledDate: '2026-02-17', completedDate: '2026-02-17', cost: 650, vendor: vendors[4], priority: 'low', nextDue: '2026-03-03', odometer: 50280 },
+    { id: 'mt7', vehicleId: 'v-2', vehiclePlate: plates[1], type: 'repair', description: 'Sağ yan ayna değişimi - hasar onarımı', status: 'scheduled', scheduledDate: '2026-02-25', completedDate: null, cost: 950, vendor: vendors[0], priority: 'medium', nextDue: null, odometer: 42580 },
+    { id: 'mt8', vehicleId: 'v-3', vehiclePlate: plates[2], type: 'periodic', description: '60.000 km kapsamlı bakım', status: 'scheduled', scheduledDate: '2026-03-15', completedDate: null, cost: 6200, vendor: vendors[3], priority: 'medium', nextDue: null, odometer: 67800 },
+    { id: 'mt9', vehicleId: 'v-4', vehiclePlate: plates[3], type: 'cleaning', description: 'Haftalık iç temizlik', status: 'completed', scheduledDate: '2026-02-20', completedDate: '2026-02-20', cost: 350, vendor: vendors[4], priority: 'low', nextDue: '2026-02-27', odometer: 38600 },
+    { id: 'mt10', vehicleId: 'v-5', vehiclePlate: plates[4], type: 'repair', description: 'Klima kompresör tamiri', status: 'completed', scheduledDate: '2026-01-28', completedDate: '2026-01-30', cost: 5400, vendor: vendors[0], priority: 'high', nextDue: null, odometer: 54800 },
+  ];
+}
+
+export { typeLabelsMap as maintenanceTypeLabels };
+
+const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', '0+', '0-'];
+const addresses = ['Şeyh Şamil Mah. 5. Cad. No:12', 'Ahi Evran Mah. Bulvar Sk. No:8/3', 'Eryaman 1. Etap 4. Cad. No:22', 'Elvankent Mah. Yıldız Sk. No:15', 'Batıkent 3. Cad. No:42/A', 'Mesa Koru Sitesi B Blok D:8', 'Ümitköy Mah. 2. Cad. No:31', 'Çayyolu 8. Cad. No:19/2', 'Yaşamkent Mah. Park Sk. No:7', 'İncek Lale Sitesi No:3'];
+const allergies = ['', '', 'Fıstık alerjisi', '', '', 'Laktoz intoleransı', '', 'Arı sokması alerjisi', '', '', '', 'Gluten hassasiyeti', '', '', ''];
+
+export function generateStudentsFull(): StudentFull[] {
+  return students.map((s, i) => {
+    const route = routes[i % routes.length];
+    return {
+      id: s.id,
+      name: s.name,
+      className: s.class,
+      routeId: route.id,
+      routeName: route.name,
+      stopName: s.stopName,
+      parentName: `${firstNames[(i + 5) % firstNames.length]} ${lastNames[i % lastNames.length]}`,
+      parentPhone: s.parentPhone,
+      parentEmail: `${s.name.split(' ')[0].toLowerCase().replace(/[İıÖöÜüŞşÇçĞğ]/g, c => ({İ:'i',ı:'i',Ö:'o',ö:'o',Ü:'u',ü:'u',Ş:'s',ş:'s',Ç:'c',ç:'c',Ğ:'g',ğ:'g'}[c] ?? c))}@email.com`,
+      address: addresses[i % addresses.length],
+      bloodType: bloodTypes[i % bloodTypes.length],
+      allergies: allergies[i % allergies.length],
+      emergencyContact: `(5${50 + i}) ${200 + i}-${5000 + i * 3}`,
+      enrollmentDate: `2025-09-${String(1 + (i % 15)).padStart(2, '0')}`,
+      isActive: i !== 7 && i !== 19,
+      photoInitials: s.name.split(' ').map(n => n[0]).join(''),
+      notes: i === 3 ? 'Öğleden sonra servise binmiyor' : i === 11 ? 'Cuma günleri yarım gün' : ''
+    };
+  });
 }
