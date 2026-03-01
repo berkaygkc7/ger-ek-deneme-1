@@ -4,14 +4,7 @@ import { initAttendance } from './attendance';
 import { initDriverSurvey } from './driverSurvey';
 import { initDemoRequest, initContactSection } from './demoRequest';
 import { initRouteCheck } from './routeCheck';
-import { initVehicleTracking } from './vehicleTracking';
-import { initParentNotifications } from './parentNotifications';
-import { initReporting } from './reporting';
-import { initPayments } from './payments';
-import { initParentPortal } from './parentPortal';
-import { initMessaging } from './messaging';
-import { initMaintenance } from './maintenance';
-import { initStudentManagement } from './studentManagement';
+import { initInsurance } from './insurance';
 
 function initTabSystem(): void {
   const tabBtns = document.querySelectorAll<HTMLButtonElement>('.sp-tab-btn');
@@ -20,7 +13,6 @@ function initTabSystem(): void {
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.dataset.tab;
-      if (!target) return;
       tabBtns.forEach(b => b.classList.remove('active'));
       tabPanels.forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
@@ -39,14 +31,7 @@ function init(): void {
   initDemoRequest();
   initContactSection();
   initRouteCheck();
-  initVehicleTracking();
-  initParentNotifications();
-  initReporting();
-  initPayments();
-  initParentPortal();
-  initMessaging();
-  initMaintenance();
-  initStudentManagement();
+  initInsurance();
 }
 
 if (document.readyState === 'loading') {
