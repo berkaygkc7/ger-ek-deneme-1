@@ -1,4 +1,4 @@
-import type { Student, Route, RouteStop, Activity } from './types';
+import type { Student, Route, RouteStop, Activity, ChatChannel, ChatMessage, MaintenanceRecord, ParentNotification, Payment, StudentFull, VehicleStatus } from './types';
 
 const stopNames = [
   'Şeyh Şamil Mahallesi', 'Ahi Evran Mahallesi', 'Eryaman 1. Etap',
@@ -161,3 +161,136 @@ export const driverList = [
   { id: 'd4', name: 'Ali Kara', plate: '06 JKL 012', route: 'Çayyolu - Ümitköy', avatar: 'AK' },
   { id: 'd5', name: 'Ömer Aksoy', plate: '06 MNO 345', route: 'Bağlıca - Yapracık', avatar: 'ÖA' },
 ];
+
+export function generateChannels(): ChatChannel[] {
+  const now = Date.now();
+  return [
+    { id: 'ch1', name: 'Ahmet Çelik', type: 'direct', avatar: 'AÇ', participants: ['Admin', 'Ahmet Çelik'], lastMessage: 'Sabah seferi tamamlandı, 28 öğrenci taşındı.', lastMessageTime: new Date(now - 15 * 60000), unreadCount: 2 },
+    { id: 'ch2', name: 'Şoförler Grubu', type: 'group', avatar: '🚌', participants: ['Admin', 'Ahmet Çelik', 'Mustafa Demir', 'Hasan Yıldız', 'Ali Kara', 'Ömer Aksoy'], lastMessage: 'Yarınki rota değişikliği hakkında bilgi verildi.', lastMessageTime: new Date(now - 2 * 3600000), unreadCount: 5 },
+    { id: 'ch3', name: 'Veli Duyuruları', type: 'announcement', avatar: '📢', participants: ['Admin', 'Tüm Veliler'], lastMessage: 'Bayram tatili servis programı açıklandı.', lastMessageTime: new Date(now - 5 * 3600000), unreadCount: 0 },
+    { id: 'ch4', name: 'Mehmet Kaya (Veli)', type: 'direct', avatar: 'MK', participants: ['Admin', 'Mehmet Kaya'], lastMessage: 'Yarın kızım servise binmeyecek, bilginize.', lastMessageTime: new Date(now - 8 * 3600000), unreadCount: 1 },
+    { id: 'ch5', name: 'Teknik Ekip', type: 'group', avatar: '🔧', participants: ['Admin', 'Serkan Aydın', 'Burak Şen'], lastMessage: '06 GHI 789 periyodik bakıma alındı.', lastMessageTime: new Date(now - 24 * 3600000), unreadCount: 0 },
+  ];
+}
+
+export function generateMessages(channelId: string): ChatMessage[] {
+  const now = Date.now();
+  const msgs: Record<string, ChatMessage[]> = {
+    ch1: [
+      { id: 'm1', channelId: 'ch1', sender: 'Ahmet Çelik', senderAvatar: 'AÇ', senderRole: 'driver', text: 'Günaydın, sabah seferine başlıyorum.', timestamp: new Date(now - 3 * 3600000), read: true },
+      { id: 'm2', channelId: 'ch1', sender: 'Admin', senderAvatar: 'AD', senderRole: 'admin', text: 'Günaydın Ahmet bey, güvenli yolculuklar!', timestamp: new Date(now - 2.9 * 3600000), read: true },
+      { id: 'm3', channelId: 'ch1', sender: 'Ahmet Çelik', senderAvatar: 'AÇ', senderRole: 'driver', text: 'Sabah seferi tamamlandı, 28 öğrenci taşındı.', timestamp: new Date(now - 15 * 60000), read: false },
+    ],
+    ch2: [
+      { id: 'm4', channelId: 'ch2', sender: 'Admin', senderAvatar: 'AD', senderRole: 'admin', text: 'Yarınki rota değişikliği hakkında bilgi verildi.', timestamp: new Date(now - 2 * 3600000), read: true },
+    ],
+    ch4: [
+      { id: 'm5', channelId: 'ch4', sender: 'Mehmet Kaya', senderAvatar: 'MK', senderRole: 'parent', text: 'Yarın kızım servise binmeyecek, bilginize.', timestamp: new Date(now - 8 * 3600000), read: false },
+    ],
+  };
+  return msgs[channelId] ?? [
+    { id: 'mdef', channelId, sender: 'Sistem', senderAvatar: '🔔', senderRole: 'staff', text: 'Bu sohbette henüz mesaj yok.', timestamp: new Date(now - 60000), read: true },
+  ];
+}
+
+export const maintenanceTypeLabels: Record<string, string> = {
+  periodic: 'Periyodik Bakım', repair: 'Tamir', tire: 'Lastik', brake: 'Fren',
+  oil: 'Yağ Değişimi', inspection: 'Muayene', cleaning: 'Temizlik'
+};
+
+export function generateMaintenanceRecords(): MaintenanceRecord[] {
+  return [
+    { id: 'mt1', vehiclePlate: '06 ABC 123', type: 'periodic', status: 'completed', priority: 'medium', description: 'Periyodik 40.000 km bakımı yapıldı.', scheduledDate: daysAgo(10), completedDate: daysAgo(8), cost: 4500, vendor: 'Mercedes Yetkili Servis', odometer: 40200, nextDue: daysFromNow(180) },
+    { id: 'mt2', vehiclePlate: '06 DEF 456', type: 'oil', status: 'scheduled', priority: 'low', description: 'Motor yağı ve filtre değişimi.', scheduledDate: daysFromNow(5), cost: 1800, vendor: 'Oto Bakım Merkezi', odometer: 55300 },
+    { id: 'mt3', vehiclePlate: '06 GHI 789', type: 'brake', status: 'in_progress', priority: 'high', description: 'Ön fren balataları ve diskler değiştirilecek.', scheduledDate: daysAgo(1), cost: 3200, vendor: 'Fren Uzmanı', odometer: 62100 },
+    { id: 'mt4', vehiclePlate: '06 JKL 012', type: 'tire', status: 'scheduled', priority: 'medium', description: '4 adet kış lastiği takılacak.', scheduledDate: daysFromNow(12), cost: 6800, vendor: 'Lastik Dünyası', odometer: 28400 },
+    { id: 'mt5', vehiclePlate: '06 MNO 345', type: 'inspection', status: 'scheduled', priority: 'urgent', description: 'Araç muayenesi yapılacak (süre doluyor).', scheduledDate: daysFromNow(3), cost: 800, vendor: 'TÜVTÜRK', odometer: 71500 },
+    { id: 'mt6', vehiclePlate: '06 PQR 678', type: 'repair', status: 'completed', priority: 'high', description: 'Klima kompresörü değiştirildi.', scheduledDate: daysAgo(20), completedDate: daysAgo(18), cost: 5500, vendor: 'Klima Servis', odometer: 48900, nextDue: daysFromNow(365) },
+    { id: 'mt7', vehiclePlate: '06 ABC 123', type: 'cleaning', status: 'completed', priority: 'low', description: 'İç-dış detaylı temizlik yapıldı.', scheduledDate: daysAgo(3), completedDate: daysAgo(3), cost: 400, vendor: 'Araç Yıkama', odometer: 40500 },
+  ];
+}
+
+export function generateNotifications(): ParentNotification[] {
+  const now = Date.now();
+  return [
+    { id: 'n1', type: 'arrival', title: 'Servis Okula Ulaştı', message: 'Çocuğunuz okula güvenle ulaşmıştır.', studentName: 'Elif Yılmaz', parentName: 'Ayşe Yılmaz', parentPhone: '(530) 100-4000', timestamp: new Date(now - 30 * 60000), read: false, priority: 'low' },
+    { id: 'n2', type: 'delay', title: 'Servis Gecikmesi', message: 'Trafik yoğunluğu nedeniyle servis yaklaşık 10 dk gecikmektedir.', studentName: 'Yusuf Kaya', parentName: 'Mehmet Kaya', parentPhone: '(531) 103-4007', timestamp: new Date(now - 60 * 60000), read: false, priority: 'high' },
+    { id: 'n3', type: 'absence', title: 'Devamsızlık Bildirimi', message: 'Çocuğunuz bugün servis durağında bulunmamıştır.', studentName: 'Burak Şahin', parentName: 'Hasan Şahin', parentPhone: '(535) 115-4035', timestamp: new Date(now - 3 * 3600000), read: true, priority: 'medium' },
+    { id: 'n4', type: 'departure', title: 'Servis Hareket Etti', message: 'Akşam servisi okuldan hareket etmiştir.', studentName: 'Zeynep Demir', parentName: 'Fatma Demir', parentPhone: '(532) 106-4014', timestamp: new Date(now - 5 * 3600000), read: true, priority: 'low' },
+    { id: 'n5', type: 'emergency', title: 'Acil Durum Bildirimi', message: 'Araç arızası nedeniyle yedek servis gönderilmiştir.', studentName: 'Mehmet Çelik', parentName: 'Ali Çelik', parentPhone: '(533) 109-4021', timestamp: new Date(now - 8 * 3600000), read: true, priority: 'urgent' },
+    { id: 'n6', type: 'general', title: 'Bayram Programı', message: 'Bayram tatili servis programı güncellendi.', studentName: '', parentName: 'Tüm Veliler', parentPhone: '', timestamp: new Date(now - 24 * 3600000), read: true, priority: 'low' },
+  ];
+}
+
+export function generatePayments(): Payment[] {
+  return [
+    { id: 'p1', studentId: 'stu-1', studentName: 'Elif Yılmaz', parentName: 'Ayşe Yılmaz', month: '2025-03', amount: 3500, dueDate: daysFromNow(10), status: 'pending', invoiceNo: 'INV-2025-001' },
+    { id: 'p2', studentId: 'stu-2', studentName: 'Yusuf Kaya', parentName: 'Mehmet Kaya', month: '2025-03', amount: 3500, dueDate: daysFromNow(10), status: 'paid', invoiceNo: 'INV-2025-002', method: 'credit_card', paidDate: daysAgo(5) },
+    { id: 'p3', studentId: 'stu-3', studentName: 'Zeynep Demir', parentName: 'Fatma Demir', month: '2025-03', amount: 2500, dueDate: daysAgo(5), status: 'overdue', invoiceNo: 'INV-2025-003' },
+    { id: 'p4', studentId: 'stu-4', studentName: 'Mehmet Çelik', parentName: 'Ali Çelik', month: '2025-03', amount: 5000, dueDate: daysFromNow(10), status: 'partial', invoiceNo: 'INV-2025-004', method: 'bank_transfer' },
+    { id: 'p5', studentId: 'stu-5', studentName: 'Ayşe Arslan', parentName: 'Zeynep Arslan', month: '2025-03', amount: 3500, dueDate: daysFromNow(10), status: 'paid', invoiceNo: 'INV-2025-005', method: 'auto_debit', paidDate: daysAgo(2) },
+    { id: 'p6', studentId: 'stu-6', studentName: 'Burak Şahin', parentName: 'Hasan Şahin', month: '2025-02', amount: 3500, dueDate: daysAgo(30), status: 'overdue', invoiceNo: 'INV-2025-006' },
+    { id: 'p7', studentId: 'stu-7', studentName: 'Defne Doğan', parentName: 'Selin Doğan', month: '2025-03', amount: 2500, dueDate: daysFromNow(10), status: 'paid', invoiceNo: 'INV-2025-007', method: 'cash', paidDate: daysAgo(1) },
+  ];
+}
+
+export function getPaymentSummary() {
+  const payments = generatePayments();
+  const collected = payments.filter(p => p.status === 'paid').reduce((s, p) => s + p.amount, 0);
+  const pending = payments.filter(p => p.status === 'pending' || p.status === 'partial').reduce((s, p) => s + p.amount, 0);
+  const overdue = payments.filter(p => p.status === 'overdue').reduce((s, p) => s + p.amount, 0);
+  const totalRevenue = collected + pending + overdue;
+  return { totalRevenue, collected, pending, overdue, collectionRate: totalRevenue > 0 ? Math.round((collected / totalRevenue) * 100) : 0 };
+}
+
+export function getReportSummary() {
+  return { totalStudents: 30, activeRoutes: 5, avgAttendance: 96.2, totalTripsToday: 10, onTimePercentage: 94.5, activeVehicles: 7, totalDrivers: 5, avgDriverRating: 4.8 };
+}
+
+export function getWeeklyAttendance() {
+  return [
+    { day: 'Pazartesi', present: 28, absent: 2, total: 30 },
+    { day: 'Salı', present: 29, absent: 1, total: 30 },
+    { day: 'Çarşamba', present: 27, absent: 3, total: 30 },
+    { day: 'Perşembe', present: 30, absent: 0, total: 30 },
+    { day: 'Cuma', present: 26, absent: 4, total: 30 },
+  ];
+}
+
+export function getRoutePerformances() {
+  return routes.map(r => ({
+    routeName: r.name, onTimeRate: 85 + Math.floor(Math.random() * 15),
+    studentCount: 20 + Math.floor(Math.random() * 15), tripCount: 8 + Math.floor(Math.random() * 4),
+    avgDelay: Math.floor(Math.random() * 8), satisfaction: +(4 + Math.random()).toFixed(1),
+  }));
+}
+
+const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', '0+', '0-'];
+const addresses = ['Şeyh Şamil Mah. No:12', 'Ahi Evran Mah. Cadde 5', 'Eryaman 1. Etap Blok C', 'Elvankent Mah. Sok 8', 'Batıkent Metro Yanı No:3'];
+
+export function generateStudentsFull(): StudentFull[] {
+  return students.map((s, i) => {
+    const route = routes[i % routes.length];
+    return {
+      id: s.id, name: s.name, className: s.class, routeId: route.id, routeName: route.name,
+      isActive: i !== 7, photoInitials: s.name.split(' ').map(n => n[0]).join(''),
+      parentName: `${firstNames[(i + 5) % firstNames.length]} ${s.name.split(' ')[1]}`,
+      parentPhone: s.parentPhone, parentEmail: `veli${i + 1}@email.com`,
+      emergencyContact: `(555) ${200 + i}-${3000 + i}`, address: addresses[i % addresses.length],
+      bloodType: bloodTypes[i % bloodTypes.length], allergies: i === 3 ? 'Fıstık alerjisi' : undefined,
+      notes: i === 12 ? 'Güzergah dışı ikamet' : undefined,
+      enrollmentDate: `2024-09-0${(i % 9) + 1}`, stopName: s.stopName,
+    };
+  });
+}
+
+export function generateVehicleStatuses(): VehicleStatus[] {
+  const now = new Date();
+  return [
+    { id: 'vs1', plate: '06 ABC 123', status: 'active', driverName: 'Ahmet Çelik', routeName: 'Etimesgut - Merkez', nextStop: 'Şeyh Şamil Mah.', eta: '3 dk', studentsOnBoard: 22, capacity: 30, fuelLevel: 75, lastUpdate: new Date(now.getTime() - 60000), position: { lat: 39.95, lng: 32.68, speed: 35, heading: 90 } },
+    { id: 'vs2', plate: '06 DEF 456', status: 'active', driverName: 'Mustafa Demir', routeName: 'Sincan - Batıkent', nextStop: 'Batıkent Metro', eta: '7 dk', studentsOnBoard: 18, capacity: 25, fuelLevel: 60, lastUpdate: new Date(now.getTime() - 120000), position: { lat: 39.97, lng: 32.72, speed: 40, heading: 180 } },
+    { id: 'vs3', plate: '06 GHI 789', status: 'maintenance', driverName: 'Hasan Yıldız', routeName: 'Eryaman - Elvankent', nextStop: '-', eta: '-', studentsOnBoard: 0, capacity: 28, fuelLevel: 45, lastUpdate: new Date(now.getTime() - 3600000), position: { lat: 39.92, lng: 32.65, speed: 0, heading: 0 } },
+    { id: 'vs4', plate: '06 JKL 012', status: 'returning', driverName: 'Ali Kara', routeName: 'Çayyolu - Ümitköy', nextStop: 'Garaj', eta: '12 dk', studentsOnBoard: 0, capacity: 30, fuelLevel: 50, lastUpdate: new Date(now.getTime() - 300000), position: { lat: 39.88, lng: 32.75, speed: 55, heading: 270 } },
+    { id: 'vs5', plate: '06 MNO 345', status: 'idle', driverName: 'Ömer Aksoy', routeName: 'Bağlıca - Yapracık', nextStop: '-', eta: '-', studentsOnBoard: 0, capacity: 22, fuelLevel: 90, lastUpdate: new Date(now.getTime() - 7200000), position: { lat: 39.94, lng: 32.70, speed: 0, heading: 0 } },
+  ];
+}
