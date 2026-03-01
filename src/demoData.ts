@@ -75,6 +75,85 @@ export function generateActivities(): Activity[] {
   return items;
 }
 
+import type { VehicleInsurance } from './types';
+
+function daysFromNow(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().split('T')[0];
+}
+
+function daysAgo(days: number): string {
+  return daysFromNow(-days);
+}
+
+export const vehicleInsuranceData: VehicleInsurance[] = [
+  {
+    vehicleId: 'v1', plate: '06 ABC 123', brand: 'Mercedes', model: 'Sprinter', year: 2021,
+    driverName: 'Ahmet Çelik',
+    kaskoStart: daysAgo(340), kaskoEnd: daysFromNow(25),
+    sigortaStart: daysAgo(350), sigortaEnd: daysFromNow(15),
+    kaskoCompany: 'Allianz Sigorta', sigortaCompany: 'Axa Sigorta',
+    kaskoPolicy: 'KSK-2024-001', sigortaPolicy: 'ZMS-2024-001', notes: ''
+  },
+  {
+    vehicleId: 'v2', plate: '06 DEF 456', brand: 'Ford', model: 'Transit', year: 2022,
+    driverName: 'Mustafa Demir',
+    kaskoStart: daysAgo(200), kaskoEnd: daysFromNow(165),
+    sigortaStart: daysAgo(200), sigortaEnd: daysFromNow(165),
+    kaskoCompany: 'Anadolu Sigorta', sigortaCompany: 'Anadolu Sigorta',
+    kaskoPolicy: 'KSK-2024-002', sigortaPolicy: 'ZMS-2024-002', notes: ''
+  },
+  {
+    vehicleId: 'v3', plate: '06 GHI 789', brand: 'Mercedes', model: 'Vito', year: 2020,
+    driverName: 'Hasan Yıldız',
+    kaskoStart: daysAgo(370), kaskoEnd: daysAgo(5),
+    sigortaStart: daysAgo(360), sigortaEnd: daysFromNow(5),
+    kaskoCompany: 'Mapfre Sigorta', sigortaCompany: 'Sompo Sigorta',
+    kaskoPolicy: 'KSK-2024-003', sigortaPolicy: 'ZMS-2024-003', notes: 'Kasko yenilenmesi gerekiyor'
+  },
+  {
+    vehicleId: 'v4', plate: '06 JKL 012', brand: 'Volkswagen', model: 'Crafter', year: 2023,
+    driverName: 'Ali Kara',
+    kaskoStart: daysAgo(100), kaskoEnd: daysFromNow(265),
+    sigortaStart: daysAgo(100), sigortaEnd: daysFromNow(265),
+    kaskoCompany: 'HDI Sigorta', sigortaCompany: 'HDI Sigorta',
+    kaskoPolicy: 'KSK-2024-004', sigortaPolicy: 'ZMS-2024-004', notes: ''
+  },
+  {
+    vehicleId: 'v5', plate: '06 MNO 345', brand: 'Iveco', model: 'Daily', year: 2021,
+    driverName: 'Ömer Aksoy',
+    kaskoStart: daysAgo(330), kaskoEnd: daysFromNow(35),
+    sigortaStart: daysAgo(355), sigortaEnd: daysFromNow(10),
+    kaskoCompany: 'Zurich Sigorta', sigortaCompany: 'Groupama Sigorta',
+    kaskoPolicy: 'KSK-2024-005', sigortaPolicy: 'ZMS-2024-005', notes: 'Sigorta yenilenecek'
+  },
+  {
+    vehicleId: 'v6', plate: '06 PQR 678', brand: 'Mercedes', model: 'Sprinter', year: 2022,
+    driverName: 'Kemal Öztürk',
+    kaskoStart: daysAgo(380), kaskoEnd: daysAgo(15),
+    sigortaStart: daysAgo(380), sigortaEnd: daysAgo(15),
+    kaskoCompany: 'Allianz Sigorta', sigortaCompany: 'Allianz Sigorta',
+    kaskoPolicy: 'KSK-2024-006', sigortaPolicy: 'ZMS-2024-006', notes: 'Her iki poliçe de süresi dolmuş!'
+  },
+  {
+    vehicleId: 'v7', plate: '06 STU 901', brand: 'Ford', model: 'Transit Custom', year: 2023,
+    driverName: 'Serkan Aydın',
+    kaskoStart: daysAgo(50), kaskoEnd: daysFromNow(315),
+    sigortaStart: daysAgo(50), sigortaEnd: daysFromNow(315),
+    kaskoCompany: 'Axa Sigorta', sigortaCompany: 'Axa Sigorta',
+    kaskoPolicy: 'KSK-2024-007', sigortaPolicy: 'ZMS-2024-007', notes: ''
+  },
+  {
+    vehicleId: 'v8', plate: '06 VWX 234', brand: 'Hyundai', model: 'H350', year: 2021,
+    driverName: 'Burak Şen',
+    kaskoStart: daysAgo(300), kaskoEnd: daysFromNow(65),
+    sigortaStart: daysAgo(340), sigortaEnd: daysFromNow(25),
+    kaskoCompany: 'Sompo Sigorta', sigortaCompany: 'Mapfre Sigorta',
+    kaskoPolicy: 'KSK-2024-008', sigortaPolicy: 'ZMS-2024-008', notes: ''
+  },
+];
+
 export const driverList = [
   { id: 'd1', name: 'Ahmet Çelik', plate: '06 ABC 123', route: 'Etimesgut - Merkez', avatar: 'AÇ' },
   { id: 'd2', name: 'Mustafa Demir', plate: '06 DEF 456', route: 'Sincan - Batıkent', avatar: 'MD' },

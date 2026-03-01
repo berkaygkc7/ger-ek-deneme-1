@@ -4,6 +4,7 @@ import { initAttendance } from './attendance';
 import { initDriverSurvey } from './driverSurvey';
 import { initDemoRequest, initContactSection } from './demoRequest';
 import { initRouteCheck } from './routeCheck';
+import { initInsurance } from './insurance';
 
 function initTabSystem(): void {
   const tabBtns = document.querySelectorAll<HTMLButtonElement>('.sp-tab-btn');
@@ -30,6 +31,7 @@ function init(): void {
   initDemoRequest();
   initContactSection();
   initRouteCheck();
+  initInsurance();
 }
 
 if (document.readyState === 'loading') {

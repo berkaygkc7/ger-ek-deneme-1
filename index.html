@@ -1560,6 +1560,309 @@
             overflow: hidden;
         }
 
+        /* Insurance / Kasko Panel */
+        .sp-ins-top-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .sp-ins-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .sp-ins-stat-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .sp-ins-stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .sp-ins-stat-num {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .sp-ins-stat-lbl {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .sp-ins-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .sp-ins-toolbar-left {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .sp-ins-bell-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sp-ins-bell {
+            position: relative;
+            background: none;
+            border: 2px solid var(--navy-blue);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sp-ins-bell:hover {
+            background: var(--navy-blue);
+            border-color: var(--navy-blue);
+        }
+
+        .sp-ins-bell-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e53935;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sp-ins-bell-text {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .sp-ins-notif-panel {
+            display: none;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .sp-ins-notif-panel.open {
+            display: block;
+        }
+
+        .sp-ins-notif-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .sp-ins-notif-header h4 {
+            color: var(--navy-blue);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .sp-ins-notif-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .sp-ins-notif-card {
+            padding: 0.75rem 1rem;
+            background: var(--gray-light);
+            border-radius: 8px;
+        }
+
+        .sp-ins-notif-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .sp-ins-notif-head strong {
+            color: var(--navy-blue);
+            font-size: 0.95rem;
+        }
+
+        .sp-ins-notif-head span {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .sp-ins-notif-line {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+            padding: 0.15rem 0;
+        }
+
+        /* Insurance Table */
+        .sp-ins-table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .sp-ins-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .sp-ins-table thead {
+            background: var(--navy-blue);
+            color: var(--white);
+        }
+
+        .sp-ins-table th {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .sp-ins-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        .sp-ins-row { transition: background 0.2s; }
+        .sp-ins-row:hover { background: #f8f9fa; }
+
+        .sp-ins-row-expired { background: #fff5f5; }
+        .sp-ins-row-expired:hover { background: #ffe8e8; }
+        .sp-ins-row-critical { background: #fff8f0; }
+        .sp-ins-row-critical:hover { background: #fff0e0; }
+
+        .sp-ins-vehicle {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .sp-ins-vehicle strong {
+            color: var(--navy-blue);
+            font-size: 0.95rem;
+        }
+
+        .sp-ins-vehicle small {
+            color: var(--gray);
+            font-size: 0.75rem;
+        }
+
+        .sp-ins-date {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+        }
+
+        .sp-ins-badge {
+            display: inline-block;
+            padding: 0.15rem 0.55rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .sp-ins-days {
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .sp-ins-days.urgent {
+            animation: insFlash 2s ease-in-out infinite;
+        }
+
+        @keyframes insFlash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Insurance Edit Modal */
+        .sp-ins-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 10003;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            animation: fadeInUp 0.2s ease;
+        }
+
+        .sp-ins-modal {
+            background: var(--white);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .sp-ins-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 1.5rem;
+            background: linear-gradient(135deg, var(--navy-blue), var(--navy-dark));
+            color: var(--white);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .sp-ins-modal-header h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .sp-ins-modal-body {
+            padding: 1.5rem;
+        }
+
         /* Responsive for new panels */
         @media (max-width: 768px) {
             .sp-tabs { gap: 0.3rem; }
@@ -1573,6 +1876,11 @@
             .sp-criterion { flex-wrap: wrap; }
             .sp-attendance-stats-bar { flex-direction: column; }
             .sp-att-stat { min-width: unset; }
+            .sp-ins-stats { grid-template-columns: repeat(2, 1fr); }
+            .sp-ins-table { font-size: 0.8rem; }
+            .sp-ins-table th, .sp-ins-table td { padding: 0.5rem; }
+            .sp-ins-toolbar { flex-direction: column; align-items: stretch; }
+            .sp-ins-bell-area { justify-content: center; }
         }
 
         /* Chatbot Styles */
@@ -2158,6 +2466,7 @@
                 <button class="sp-tab-btn" data-tab="attendance">📋 Yoklama</button>
                 <button class="sp-tab-btn" data-tab="activities">📊 Son Aktiviteler</button>
                 <button class="sp-tab-btn" data-tab="route-check">⚠️ Güzergah Kontrol</button>
+                <button class="sp-tab-btn" data-tab="insurance">🛡️ Sigorta / Kasko</button>
                 <button class="sp-tab-btn" data-tab="demo-request">🎯 Demo Talep Et</button>
                 <button class="sp-tab-btn" data-action="open-survey">⭐ Şoför Değerlendir</button>
             </div>
@@ -2195,6 +2504,15 @@
                     <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Güzergah Dışı Öğrenciler</h3>
                     <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Kayıtlı güzergah dışında ikamet eden öğrencileri görüntüleyin ve velileri bilgilendirin.</p>
                     <div id="routeCheckContent"></div>
+                </div>
+            </div>
+
+            <!-- Insurance / Kasko -->
+            <div class="sp-tab-panel" id="panel-insurance">
+                <div class="container">
+                    <h3 style="color:var(--navy-blue);margin-bottom:0.5rem;">Sigorta & Kasko Takibi</h3>
+                    <p style="color:var(--gray);margin-bottom:1.5rem;font-size:0.9rem;">Araçlarınızın kasko ve trafik sigortası bitiş tarihlerini takip edin. Süresi yaklaşan veya dolan poliçeler için otomatik bildirim alın.</p>
+                    <div id="insuranceContent"></div>
                 </div>
             </div>
 

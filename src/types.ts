@@ -65,3 +65,23 @@ export interface DemoRequest {
 }
 
 export type RoutePlannerStep = 'select-start' | 'select-end' | 'select-time' | 'confirm';
+
+export type InsuranceStatus = 'expired' | 'critical' | 'warning' | 'ok';
+
+export interface VehicleInsurance {
+  vehicleId: string;
+  plate: string;
+  brand: string;
+  model: string;
+  year: number;
+  driverName: string;
+  kaskoStart: string;
+  kaskoEnd: string;
+  sigortaStart: string;
+  sigortaEnd: string;
+  kaskoCompany: string;
+  sigortaCompany: string;
+  kaskoPolicy: string;
+  sigortaPolicy: string;
+  notes: string;
+}

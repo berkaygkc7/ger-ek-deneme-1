@@ -122,6 +122,152 @@ var ServisApp = (() => {
     ];
     return items;
   }
+  function daysFromNow(days) {
+    const d = /* @__PURE__ */ new Date();
+    d.setDate(d.getDate() + days);
+    return d.toISOString().split("T")[0];
+  }
+  function daysAgo(days) {
+    return daysFromNow(-days);
+  }
+  var vehicleInsuranceData = [
+    {
+      vehicleId: "v1",
+      plate: "06 ABC 123",
+      brand: "Mercedes",
+      model: "Sprinter",
+      year: 2021,
+      driverName: "Ahmet \xC7elik",
+      kaskoStart: daysAgo(340),
+      kaskoEnd: daysFromNow(25),
+      sigortaStart: daysAgo(350),
+      sigortaEnd: daysFromNow(15),
+      kaskoCompany: "Allianz Sigorta",
+      sigortaCompany: "Axa Sigorta",
+      kaskoPolicy: "KSK-2024-001",
+      sigortaPolicy: "ZMS-2024-001",
+      notes: ""
+    },
+    {
+      vehicleId: "v2",
+      plate: "06 DEF 456",
+      brand: "Ford",
+      model: "Transit",
+      year: 2022,
+      driverName: "Mustafa Demir",
+      kaskoStart: daysAgo(200),
+      kaskoEnd: daysFromNow(165),
+      sigortaStart: daysAgo(200),
+      sigortaEnd: daysFromNow(165),
+      kaskoCompany: "Anadolu Sigorta",
+      sigortaCompany: "Anadolu Sigorta",
+      kaskoPolicy: "KSK-2024-002",
+      sigortaPolicy: "ZMS-2024-002",
+      notes: ""
+    },
+    {
+      vehicleId: "v3",
+      plate: "06 GHI 789",
+      brand: "Mercedes",
+      model: "Vito",
+      year: 2020,
+      driverName: "Hasan Y\u0131ld\u0131z",
+      kaskoStart: daysAgo(370),
+      kaskoEnd: daysAgo(5),
+      sigortaStart: daysAgo(360),
+      sigortaEnd: daysFromNow(5),
+      kaskoCompany: "Mapfre Sigorta",
+      sigortaCompany: "Sompo Sigorta",
+      kaskoPolicy: "KSK-2024-003",
+      sigortaPolicy: "ZMS-2024-003",
+      notes: "Kasko yenilenmesi gerekiyor"
+    },
+    {
+      vehicleId: "v4",
+      plate: "06 JKL 012",
+      brand: "Volkswagen",
+      model: "Crafter",
+      year: 2023,
+      driverName: "Ali Kara",
+      kaskoStart: daysAgo(100),
+      kaskoEnd: daysFromNow(265),
+      sigortaStart: daysAgo(100),
+      sigortaEnd: daysFromNow(265),
+      kaskoCompany: "HDI Sigorta",
+      sigortaCompany: "HDI Sigorta",
+      kaskoPolicy: "KSK-2024-004",
+      sigortaPolicy: "ZMS-2024-004",
+      notes: ""
+    },
+    {
+      vehicleId: "v5",
+      plate: "06 MNO 345",
+      brand: "Iveco",
+      model: "Daily",
+      year: 2021,
+      driverName: "\xD6mer Aksoy",
+      kaskoStart: daysAgo(330),
+      kaskoEnd: daysFromNow(35),
+      sigortaStart: daysAgo(355),
+      sigortaEnd: daysFromNow(10),
+      kaskoCompany: "Zurich Sigorta",
+      sigortaCompany: "Groupama Sigorta",
+      kaskoPolicy: "KSK-2024-005",
+      sigortaPolicy: "ZMS-2024-005",
+      notes: "Sigorta yenilenecek"
+    },
+    {
+      vehicleId: "v6",
+      plate: "06 PQR 678",
+      brand: "Mercedes",
+      model: "Sprinter",
+      year: 2022,
+      driverName: "Kemal \xD6zt\xFCrk",
+      kaskoStart: daysAgo(380),
+      kaskoEnd: daysAgo(15),
+      sigortaStart: daysAgo(380),
+      sigortaEnd: daysAgo(15),
+      kaskoCompany: "Allianz Sigorta",
+      sigortaCompany: "Allianz Sigorta",
+      kaskoPolicy: "KSK-2024-006",
+      sigortaPolicy: "ZMS-2024-006",
+      notes: "Her iki poli\xE7e de s\xFCresi dolmu\u015F!"
+    },
+    {
+      vehicleId: "v7",
+      plate: "06 STU 901",
+      brand: "Ford",
+      model: "Transit Custom",
+      year: 2023,
+      driverName: "Serkan Ayd\u0131n",
+      kaskoStart: daysAgo(50),
+      kaskoEnd: daysFromNow(315),
+      sigortaStart: daysAgo(50),
+      sigortaEnd: daysFromNow(315),
+      kaskoCompany: "Axa Sigorta",
+      sigortaCompany: "Axa Sigorta",
+      kaskoPolicy: "KSK-2024-007",
+      sigortaPolicy: "ZMS-2024-007",
+      notes: ""
+    },
+    {
+      vehicleId: "v8",
+      plate: "06 VWX 234",
+      brand: "Hyundai",
+      model: "H350",
+      year: 2021,
+      driverName: "Burak \u015Een",
+      kaskoStart: daysAgo(300),
+      kaskoEnd: daysFromNow(65),
+      sigortaStart: daysAgo(340),
+      sigortaEnd: daysFromNow(25),
+      kaskoCompany: "Sompo Sigorta",
+      sigortaCompany: "Mapfre Sigorta",
+      kaskoPolicy: "KSK-2024-008",
+      sigortaPolicy: "ZMS-2024-008",
+      notes: ""
+    }
+  ];
   var driverList = [
     { id: "d1", name: "Ahmet \xC7elik", plate: "06 ABC 123", route: "Etimesgut - Merkez", avatar: "A\xC7" },
     { id: "d2", name: "Mustafa Demir", plate: "06 DEF 456", route: "Sincan - Bat\u0131kent", avatar: "MD" },
@@ -866,6 +1012,386 @@ var ServisApp = (() => {
     });
   }
 
+  // src/insurance.ts
+  var vehicles = [...vehicleInsuranceData];
+  var filterStatus = "all";
+  var searchQuery2 = "";
+  var editingId = null;
+  var notificationsShown = false;
+  var CRITICAL_DAYS = 15;
+  var WARNING_DAYS = 30;
+  function daysUntil(dateStr) {
+    const target = /* @__PURE__ */ new Date(dateStr + "T00:00:00");
+    const today = /* @__PURE__ */ new Date();
+    today.setHours(0, 0, 0, 0);
+    return Math.ceil((target.getTime() - today.getTime()) / 864e5);
+  }
+  function getStatus(dateStr) {
+    const days = daysUntil(dateStr);
+    if (days < 0) return "expired";
+    if (days <= CRITICAL_DAYS) return "critical";
+    if (days <= WARNING_DAYS) return "warning";
+    return "ok";
+  }
+  function getWorstStatus(v) {
+    const kaskoSt = getStatus(v.kaskoEnd);
+    const sigortaSt = getStatus(v.sigortaEnd);
+    const priority = ["expired", "critical", "warning", "ok"];
+    return priority[Math.min(priority.indexOf(kaskoSt), priority.indexOf(sigortaSt))];
+  }
+  function statusLabel(s) {
+    const map = {
+      expired: "S\xFCresi Dolmu\u015F",
+      critical: "Acil",
+      warning: "Yakla\u015F\u0131yor",
+      ok: "Ge\xE7erli"
+    };
+    return map[s];
+  }
+  function statusColor(s) {
+    const map = {
+      expired: "#e53935",
+      critical: "#ff5722",
+      warning: "#ff9800",
+      ok: "#4caf50"
+    };
+    return map[s];
+  }
+  function daysLabel(dateStr) {
+    const d = daysUntil(dateStr);
+    if (d < 0) return `${Math.abs(d)} g\xFCn ge\xE7ti`;
+    if (d === 0) return "Bug\xFCn doluyor!";
+    return `${d} g\xFCn kald\u0131`;
+  }
+  function formatDateTR(dateStr) {
+    return (/* @__PURE__ */ new Date(dateStr + "T00:00:00")).toLocaleDateString("tr-TR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+  function getStats2() {
+    let expired = 0, critical = 0, warning = 0, ok = 0;
+    vehicles.forEach((v) => {
+      const ws = getWorstStatus(v);
+      if (ws === "expired") expired++;
+      else if (ws === "critical") critical++;
+      else if (ws === "warning") warning++;
+      else ok++;
+    });
+    return { expired, critical, warning, ok, total: vehicles.length };
+  }
+  function getFiltered() {
+    return vehicles.filter((v) => {
+      const ws = getWorstStatus(v);
+      const matchFilter = filterStatus === "all" || ws === filterStatus;
+      const matchSearch = !searchQuery2 || v.plate.toLowerCase().includes(searchQuery2.toLowerCase()) || v.driverName.toLowerCase().includes(searchQuery2.toLowerCase()) || v.brand.toLowerCase().includes(searchQuery2.toLowerCase());
+      return matchFilter && matchSearch;
+    }).sort((a, b) => {
+      const prio = ["expired", "critical", "warning", "ok"];
+      return prio.indexOf(getWorstStatus(a)) - prio.indexOf(getWorstStatus(b));
+    });
+  }
+  function renderStatusBadge(dateStr) {
+    const s = getStatus(dateStr);
+    return `<span class="sp-ins-badge" style="background:${statusColor(s)}">${statusLabel(s)}</span>`;
+  }
+  function renderDaysTag(dateStr) {
+    const s = getStatus(dateStr);
+    const d = daysUntil(dateStr);
+    const cls = s === "ok" ? "" : "urgent";
+    return `<span class="sp-ins-days ${cls}" style="color:${statusColor(s)}">${d < 0 ? "\u26D4" : d <= CRITICAL_DAYS ? "\u{1F534}" : d <= WARNING_DAYS ? "\u{1F7E1}" : "\u{1F7E2}"} ${daysLabel(dateStr)}</span>`;
+  }
+  function renderNotificationBell() {
+    const stats = getStats2();
+    const alertCount = stats.expired + stats.critical;
+    const warnCount = stats.warning;
+    return `
+    <div class="sp-ins-bell-area">
+      <button class="sp-ins-bell" id="insNotifBtn" title="Bildirimleri G\xF6ster">
+        \u{1F514}${alertCount > 0 ? `<span class="sp-ins-bell-badge">${alertCount}</span>` : ""}
+      </button>
+      ${alertCount > 0 ? `<span class="sp-ins-bell-text">${alertCount} acil, ${warnCount} yakla\u015Fan</span>` : ""}
+    </div>`;
+  }
+  function renderNotificationPanel() {
+    const urgent = vehicles.filter((v) => {
+      const ws = getWorstStatus(v);
+      return ws === "expired" || ws === "critical" || ws === "warning";
+    }).sort((a, b) => {
+      const prio = ["expired", "critical", "warning", "ok"];
+      return prio.indexOf(getWorstStatus(a)) - prio.indexOf(getWorstStatus(b));
+    });
+    if (urgent.length === 0) {
+      return '<div class="sp-empty-state">T\xFCm ara\xE7lar\u0131n sigorta ve kasko tarihleri ge\xE7erli.</div>';
+    }
+    return `<div class="sp-ins-notif-list">
+    ${urgent.map((v) => {
+      const kaskoSt = getStatus(v.kaskoEnd);
+      const sigortaSt = getStatus(v.sigortaEnd);
+      const items = [];
+      if (kaskoSt !== "ok") {
+        items.push(`<div class="sp-ins-notif-line"><strong>Kasko:</strong> ${formatDateTR(v.kaskoEnd)} \u2014 <span style="color:${statusColor(kaskoSt)};font-weight:700">${daysLabel(v.kaskoEnd)}</span></div>`);
+      }
+      if (sigortaSt !== "ok") {
+        items.push(`<div class="sp-ins-notif-line"><strong>Sigorta:</strong> ${formatDateTR(v.sigortaEnd)} \u2014 <span style="color:${statusColor(sigortaSt)};font-weight:700">${daysLabel(v.sigortaEnd)}</span></div>`);
+      }
+      return `
+        <div class="sp-ins-notif-card" style="border-left:4px solid ${statusColor(getWorstStatus(v))}">
+          <div class="sp-ins-notif-head">
+            <strong>\u{1F690} ${v.plate}</strong>
+            <span>${v.brand} ${v.model} \xB7 ${v.driverName}</span>
+          </div>
+          ${items.join("")}
+        </div>`;
+    }).join("")}
+  </div>`;
+  }
+  function renderEditModal(v) {
+    return `
+    <div class="sp-ins-modal-overlay" id="insModalOverlay">
+      <div class="sp-ins-modal">
+        <div class="sp-ins-modal-header">
+          <h3>\u{1F690} ${v.plate} \u2014 Sigorta Bilgilerini D\xFCzenle</h3>
+          <button class="sp-survey-close" id="insModalClose">&times;</button>
+        </div>
+        <div class="sp-ins-modal-body">
+          <div class="sp-info-box">\u{1F697} ${v.brand} ${v.model} (${v.year}) \xB7 \u015Eof\xF6r: ${v.driverName}</div>
+
+          <h4 style="color:var(--navy-blue);margin:1rem 0 0.5rem;">\u{1F6E1}\uFE0F Kasko Bilgileri</h4>
+          <div class="sp-form-row">
+            <div class="sp-form-group">
+              <label class="sp-label">Sigorta \u015Eirketi</label>
+              <input class="sp-input" type="text" id="editKaskoCompany" value="${v.kaskoCompany}">
+            </div>
+            <div class="sp-form-group">
+              <label class="sp-label">Poli\xE7e No</label>
+              <input class="sp-input" type="text" id="editKaskoPolicy" value="${v.kaskoPolicy}">
+            </div>
+          </div>
+          <div class="sp-form-row">
+            <div class="sp-form-group">
+              <label class="sp-label">Ba\u015Flang\u0131\xE7 Tarihi</label>
+              <input class="sp-input" type="date" id="editKaskoStart" value="${v.kaskoStart}">
+            </div>
+            <div class="sp-form-group">
+              <label class="sp-label">Biti\u015F Tarihi</label>
+              <input class="sp-input" type="date" id="editKaskoEnd" value="${v.kaskoEnd}">
+            </div>
+          </div>
+
+          <h4 style="color:var(--navy-blue);margin:1rem 0 0.5rem;">\u{1F4CB} Trafik Sigortas\u0131 Bilgileri</h4>
+          <div class="sp-form-row">
+            <div class="sp-form-group">
+              <label class="sp-label">Sigorta \u015Eirketi</label>
+              <input class="sp-input" type="text" id="editSigortaCompany" value="${v.sigortaCompany}">
+            </div>
+            <div class="sp-form-group">
+              <label class="sp-label">Poli\xE7e No</label>
+              <input class="sp-input" type="text" id="editSigortaPolicy" value="${v.sigortaPolicy}">
+            </div>
+          </div>
+          <div class="sp-form-row">
+            <div class="sp-form-group">
+              <label class="sp-label">Ba\u015Flang\u0131\xE7 Tarihi</label>
+              <input class="sp-input" type="date" id="editSigortaStart" value="${v.sigortaStart}">
+            </div>
+            <div class="sp-form-group">
+              <label class="sp-label">Biti\u015F Tarihi</label>
+              <input class="sp-input" type="date" id="editSigortaEnd" value="${v.sigortaEnd}">
+            </div>
+          </div>
+
+          <div class="sp-form-group">
+            <label class="sp-label">Notlar</label>
+            <textarea class="sp-textarea" id="editNotes" rows="2" placeholder="Ek notlar...">${v.notes}</textarea>
+          </div>
+
+          <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+            <button class="sp-btn sp-btn-primary" id="insModalSave" style="flex:1;">\u{1F4BE} Kaydet</button>
+            <button class="sp-btn sp-btn-outline" id="insModalCancel">\u0130ptal</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+  function render4() {
+    const container = $("#insuranceContent");
+    if (!container) return;
+    const stats = getStats2();
+    const filtered = getFiltered();
+    const showNotifPanel = document.getElementById("insNotifPanel")?.classList.contains("open") ?? false;
+    container.innerHTML = `
+    <div class="sp-ins-top-bar">
+      <div class="sp-ins-stats">
+        <div class="sp-ins-stat-card" data-filter="expired" style="border-top:3px solid #e53935">
+          <span class="sp-ins-stat-num" style="color:#e53935">${stats.expired}</span>
+          <span class="sp-ins-stat-lbl">S\xFCresi Dolmu\u015F</span>
+        </div>
+        <div class="sp-ins-stat-card" data-filter="critical" style="border-top:3px solid #ff5722">
+          <span class="sp-ins-stat-num" style="color:#ff5722">${stats.critical}</span>
+          <span class="sp-ins-stat-lbl">Acil (&le;${CRITICAL_DAYS} g\xFCn)</span>
+        </div>
+        <div class="sp-ins-stat-card" data-filter="warning" style="border-top:3px solid #ff9800">
+          <span class="sp-ins-stat-num" style="color:#ff9800">${stats.warning}</span>
+          <span class="sp-ins-stat-lbl">Yakla\u015Fan (&le;${WARNING_DAYS} g\xFCn)</span>
+        </div>
+        <div class="sp-ins-stat-card" data-filter="ok" style="border-top:3px solid #4caf50">
+          <span class="sp-ins-stat-num" style="color:#4caf50">${stats.ok}</span>
+          <span class="sp-ins-stat-lbl">Ge\xE7erli</span>
+        </div>
+      </div>
+
+      <div class="sp-ins-toolbar">
+        <div class="sp-ins-toolbar-left">
+          <select class="sp-select sp-select-sm" id="insFilterSelect">
+            <option value="all" ${filterStatus === "all" ? "selected" : ""}>T\xFCm Ara\xE7lar</option>
+            <option value="expired" ${filterStatus === "expired" ? "selected" : ""}>S\xFCresi Dolmu\u015F</option>
+            <option value="critical" ${filterStatus === "critical" ? "selected" : ""}>Acil</option>
+            <option value="warning" ${filterStatus === "warning" ? "selected" : ""}>Yakla\u015Fan</option>
+            <option value="ok" ${filterStatus === "ok" ? "selected" : ""}>Ge\xE7erli</option>
+          </select>
+          <input class="sp-input sp-input-sm" id="insSearch" type="text" placeholder="Plaka, \u015Fof\xF6r veya marka ara..." value="${searchQuery2}" style="min-width:200px;">
+        </div>
+        ${renderNotificationBell()}
+      </div>
+
+      <div class="sp-ins-notif-panel ${showNotifPanel ? "open" : ""}" id="insNotifPanel">
+        <div class="sp-ins-notif-header">
+          <h4>\u{1F514} Bildirimler</h4>
+          <button class="sp-btn sp-btn-sm sp-btn-outline" id="insNotifClose">Kapat</button>
+        </div>
+        ${renderNotificationPanel()}
+      </div>
+    </div>
+
+    <div class="sp-ins-table-wrap">
+      <table class="sp-ins-table">
+        <thead>
+          <tr>
+            <th>Ara\xE7</th>
+            <th>\u015Eof\xF6r</th>
+            <th>Kasko Biti\u015F</th>
+            <th>Kasko Durum</th>
+            <th>Sigorta Biti\u015F</th>
+            <th>Sigorta Durum</th>
+            <th>\u0130\u015Flem</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.length === 0 ? '<tr><td colspan="7" class="sp-empty-state">Ara\xE7 bulunamad\u0131.</td></tr>' : ""}
+          ${filtered.map((v) => {
+      const ws = getWorstStatus(v);
+      return `
+            <tr class="sp-ins-row sp-ins-row-${ws}">
+              <td>
+                <div class="sp-ins-vehicle">
+                  <strong>${v.plate}</strong>
+                  <small>${v.brand} ${v.model} (${v.year})</small>
+                </div>
+              </td>
+              <td>${v.driverName}</td>
+              <td><span class="sp-ins-date">${formatDateTR(v.kaskoEnd)}</span></td>
+              <td>${renderStatusBadge(v.kaskoEnd)}<br>${renderDaysTag(v.kaskoEnd)}</td>
+              <td><span class="sp-ins-date">${formatDateTR(v.sigortaEnd)}</span></td>
+              <td>${renderStatusBadge(v.sigortaEnd)}<br>${renderDaysTag(v.sigortaEnd)}</td>
+              <td>
+                <button class="sp-btn sp-btn-sm sp-btn-outline" data-edit="${v.vehicleId}" title="D\xFCzenle">\u270F\uFE0F</button>
+              </td>
+            </tr>`;
+    }).join("")}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="insModalContainer"></div>
+  `;
+    bindEvents2(container);
+  }
+  function bindEvents2(container) {
+    container.querySelector("#insFilterSelect")?.addEventListener("change", (e) => {
+      filterStatus = e.target.value;
+      render4();
+    });
+    container.querySelector("#insSearch")?.addEventListener("input", (e) => {
+      searchQuery2 = e.target.value;
+      render4();
+    });
+    container.querySelectorAll(".sp-ins-stat-card[data-filter]").forEach((card) => {
+      card.addEventListener("click", () => {
+        const f = card.dataset.filter;
+        filterStatus = filterStatus === f ? "all" : f;
+        render4();
+      });
+    });
+    container.querySelector("#insNotifBtn")?.addEventListener("click", () => {
+      const panel = container.querySelector("#insNotifPanel");
+      panel?.classList.toggle("open");
+    });
+    container.querySelector("#insNotifClose")?.addEventListener("click", () => {
+      container.querySelector("#insNotifPanel")?.classList.remove("open");
+    });
+    container.querySelectorAll("[data-edit]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        editingId = btn.dataset.edit;
+        openEditModal();
+      });
+    });
+  }
+  function openEditModal() {
+    const v = vehicles.find((x) => x.vehicleId === editingId);
+    if (!v) return;
+    const modalContainer = $("#insModalContainer");
+    if (!modalContainer) return;
+    modalContainer.innerHTML = renderEditModal(v);
+    const overlay = modalContainer.querySelector("#insModalOverlay");
+    const close = () => {
+      overlay?.remove();
+      editingId = null;
+    };
+    overlay?.addEventListener("click", (e) => {
+      if (e.target.id === "insModalOverlay") close();
+    });
+    modalContainer.querySelector("#insModalClose")?.addEventListener("click", close);
+    modalContainer.querySelector("#insModalCancel")?.addEventListener("click", close);
+    modalContainer.querySelector("#insModalSave")?.addEventListener("click", () => {
+      const idx = vehicles.findIndex((x) => x.vehicleId === editingId);
+      if (idx === -1) return;
+      vehicles[idx] = {
+        ...vehicles[idx],
+        kaskoCompany: document.getElementById("editKaskoCompany").value,
+        kaskoPolicy: document.getElementById("editKaskoPolicy").value,
+        kaskoStart: document.getElementById("editKaskoStart").value,
+        kaskoEnd: document.getElementById("editKaskoEnd").value,
+        sigortaCompany: document.getElementById("editSigortaCompany").value,
+        sigortaPolicy: document.getElementById("editSigortaPolicy").value,
+        sigortaStart: document.getElementById("editSigortaStart").value,
+        sigortaEnd: document.getElementById("editSigortaEnd").value,
+        notes: document.getElementById("editNotes").value
+      };
+      showToast(`${vehicles[idx].plate} sigorta bilgileri g\xFCncellendi.`, "success");
+      close();
+      render4();
+    });
+  }
+  function showStartupNotifications() {
+    if (notificationsShown) return;
+    notificationsShown = true;
+    const stats = getStats2();
+    if (stats.expired > 0) {
+      showToast(`\u26D4 ${stats.expired} arac\u0131n sigorta/kasko s\xFCresi dolmu\u015F! Acil yenileme gerekiyor.`, "error");
+    }
+    if (stats.critical > 0) {
+      setTimeout(() => {
+        showToast(`\u{1F534} ${stats.critical} arac\u0131n sigorta/kaskosu ${CRITICAL_DAYS} g\xFCn i\xE7inde doluyor!`, "warning");
+      }, stats.expired > 0 ? 4e3 : 0);
+    }
+  }
+  function initInsurance() {
+    render4();
+    setTimeout(showStartupNotifications, 1500);
+  }
+
   // src/main.ts
   function initTabSystem() {
     const tabBtns = document.querySelectorAll(".sp-tab-btn");
@@ -890,6 +1416,7 @@ var ServisApp = (() => {
     initDemoRequest();
     initContactSection();
     initRouteCheck();
+    initInsurance();
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
